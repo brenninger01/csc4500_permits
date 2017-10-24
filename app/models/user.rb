@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :vehicles
+  has_many :students
   has_many :permits
   has_many :facultys
   has_many :emergency_contacts
