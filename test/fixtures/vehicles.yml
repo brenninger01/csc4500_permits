@@ -8,9 +8,9 @@ one:
   license_number: MyString
   state_licensed: MyString
   experation_year: MyString
-  permits_permit_number: MyString
-  faculty_auID: MyString
-  students_auID: MyString
+  permits_permit_id: MyString
+  faculty_id: MyString
+  student_id: MyString
 
 two:
   year: MyString
@@ -20,6 +20,6 @@ two:
   license_number: MyString
   state_licensed: MyString
   experation_year: MyString
-  permits_permit_number: MyString
-  faculty_auID: MyString
-  students_auID: MyString
+  permits_permit_id: MyString
+  faculty_id: MyString
+  student_id: MyString

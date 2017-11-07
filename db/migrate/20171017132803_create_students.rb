@@ -1,6 +1,7 @@
 class CreateStudents < ActiveRecord::Migration[5.1]
   def change
-    create_table :students do |t|
+    create_table :students, id: false do |t|
+      t.string :student_id, primary_key: true
       t.string :last_name
       t.string :first_name
       t.string :home_address
@@ -16,6 +17,7 @@ class CreateStudents < ActiveRecord::Migration[5.1]
       t.boolean :new_student
       t.boolean :returning_student
       t.string :athletic_team
+      t.bigint :user_id, foreign_key: true
 
       t.timestamps
     end

@@ -20,24 +20,22 @@
 
   <tbody>
     <% @vehicles.each do |vehicle| %>
-      <% if policy(vehicle).admin_show? %>
-        <tr>
-          <td><%= vehicle.year %></td>
-          <td><%= vehicle.color %></td>
-          <td><%= vehicle.make %></td>
-          <td><%= vehicle.model %></td>
-          <td><%= vehicle.license_number %></td>
-          <td><%= vehicle.state_licensed %></td>
-          <td><%= vehicle.experation_year %></td>
-          <td><%= vehicle.permits_permit_number %></td>
-          <td><%= vehicle.faculty_auID %></td>
-          <td><%= vehicle.students_auID %></td>
-          <td><%= vehicle.user_id %></td>
-          <td><%= link_to 'Show', vehicle if policy(vehicle).show? %></td>
-          <td><%= link_to 'Edit', edit_vehicle_path(vehicle) if policy(vehicle).edit? %></td>
-          <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } if policy(vehicle).destroy? %></td>
-        </tr>
-      <% end %>
+      <tr>
+        <td><%= vehicle.year %></td>
+        <td><%= vehicle.color %></td>
+        <td><%= vehicle.make %></td>
+        <td><%= vehicle.model %></td>
+        <td><%= vehicle.license_number %></td>
+        <td><%= vehicle.state_licensed %></td>
+        <td><%= vehicle.experation_year %></td>
+        <td><%= vehicle.permit_id %></td>
+        <td><%= vehicle.faculty_id %></td>
+        <td><%= vehicle.student_id %></td>
+        <td><%= vehicle.user_id %></td>
+        <td><%= link_to 'Show', vehicle if policy(vehicle).show? %></td>
+        <td><%= link_to 'Edit', edit_vehicle_path(vehicle) if policy(vehicle).edit? %></td>
+        <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } if policy(vehicle).destroy? %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

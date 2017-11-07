@@ -7,7 +7,13 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-    @vehicles = Vehicle.all
+     if current_user.roles == 'admin'
+      @vehicles = Vehicle.all 
+     elsif user_signed_in?
+      @vehicles = Vehicle.all.where(:user_id => current_user.id)
+    else
+      @vehicles = Vehicle.all
+    end
     authorize @vehicles
   end
 
@@ -29,7 +35,7 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   # POST /vehicles.json
   def create
-    @vehicle = current_user.vehicles.new(vehicle_params)
+    @vehicle = current_user.vehicles.build(vehicle_params)
     authorize @vehicle
 
     respond_to do |format|
@@ -76,6 +82,6 @@ class VehiclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_params
-      params.require(:vehicle).permit(:year, :color, :make, :model, :license_number, :state_licensed, :experation_year, :permits_permit_number, :faculty_auID, :students_auID)
+      params.require(:vehicle).permit(:year, :color, :make, :model, :license_number, :state_licensed, :experation_year, :permits_permit_id, :faculty_id, :student_id)
     end
 end

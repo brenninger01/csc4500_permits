@@ -1,6 +1,7 @@
 class CreateFaculties < ActiveRecord::Migration[5.1]
   def change
-    create_table :faculties do |t|
+    create_table :faculties, id: false do |t|
+      t.string :faculty_id, primary_key: true
       t.string :last_name
       t.string :first_name
       t.string :home_address
@@ -13,6 +14,7 @@ class CreateFaculties < ActiveRecord::Migration[5.1]
       t.boolean :new_faculty
       t.string :department
       t.string :office
+      t.bigint :user_id, foreign_key: true
 
       t.timestamps
     end

@@ -17,7 +17,7 @@ class EmergencyContactsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create emergency_contact" do
     assert_difference('EmergencyContact.count') do
-      post emergency_contacts_url, params: { emergency_contact: { address: @emergency_contact.address, cell_phone: @emergency_contact.cell_phone, city: @emergency_contact.city, faculty_auID: @emergency_contact.faculty_auID, first_name: @emergency_contact.first_name, home_phone: @emergency_contact.home_phone, last_name: @emergency_contact.last_name, office_phone: @emergency_contact.office_phone, state: @emergency_contact.state, students_auID: @emergency_contact.students_auID, zip: @emergency_contact.zip } }
+      post emergency_contacts_url, params: { emergency_contact: { address: @emergency_contact.address, cell_phone: @emergency_contact.cell_phone, city: @emergency_contact.city, faculty_id: @emergency_contact.faculty_id, first_name: @emergency_contact.first_name, home_phone: @emergency_contact.home_phone, last_name: @emergency_contact.last_name, office_phone: @emergency_contact.office_phone, state: @emergency_contact.state, student_id: @emergency_contact.student_id, zip: @emergency_contact.zip } }
     end
 
     assert_redirected_to emergency_contact_url(EmergencyContact.last)
@@ -34,7 +34,7 @@ class EmergencyContactsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update emergency_contact" do
-    patch emergency_contact_url(@emergency_contact), params: { emergency_contact: { address: @emergency_contact.address, cell_phone: @emergency_contact.cell_phone, city: @emergency_contact.city, faculty_auID: @emergency_contact.faculty_auID, first_name: @emergency_contact.first_name, home_phone: @emergency_contact.home_phone, last_name: @emergency_contact.last_name, office_phone: @emergency_contact.office_phone, state: @emergency_contact.state, students_auID: @emergency_contact.students_auID, zip: @emergency_contact.zip } }
+    patch emergency_contact_url(@emergency_contact), params: { emergency_contact: { address: @emergency_contact.address, cell_phone: @emergency_contact.cell_phone, city: @emergency_contact.city, faculty_id: @emergency_contact.faculty_id, first_name: @emergency_contact.first_name, home_phone: @emergency_contact.home_phone, last_name: @emergency_contact.last_name, office_phone: @emergency_contact.office_phone, state: @emergency_contact.state, student_id: @emergency_contact.student_id, zip: @emergency_contact.zip } }
     assert_redirected_to emergency_contact_url(@emergency_contact)
   end
 

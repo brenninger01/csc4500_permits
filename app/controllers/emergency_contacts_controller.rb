@@ -28,7 +28,7 @@ class EmergencyContactsController < ApplicationController
   # POST /emergency_contacts
   # POST /emergency_contacts.json
   def create
-    @emergency_contact = EmergencyContact.new(emergency_contact_params)
+    @emergency_contact = current_user.build_emergency_contact(emergency_contact_params)
     authorize @emergency_contact
 
     respond_to do |format|
@@ -75,6 +75,6 @@ class EmergencyContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def emergency_contact_params
-      params.require(:emergency_contact).permit(:last_name, :first_name, :address, :city, :state, :zip, :home_phone, :cell_phone, :office_phone, :faculty_auID, :students_auID)
+      params.require(:emergency_contact).permit(:last_name, :first_name, :address, :city, :state, :zip, :home_phone, :cell_phone, :office_phone, :faculty_id, :student_id)
     end
 end

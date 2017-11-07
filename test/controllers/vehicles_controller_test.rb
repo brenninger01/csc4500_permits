@@ -17,7 +17,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vehicle" do
     assert_difference('Vehicle.count') do
-      post vehicles_url, params: { vehicle: { color: @vehicle.color, experation_year: @vehicle.experation_year, faculty_auID: @vehicle.faculty_auID, license_number: @vehicle.license_number, make: @vehicle.make, model: @vehicle.model, permits_permit_number: @vehicle.permits_permit_number, state_licensed: @vehicle.state_licensed, students_auID: @vehicle.students_auID, year: @vehicle.year } }
+      post vehicles_url, params: { vehicle: { color: @vehicle.color, experation_year: @vehicle.experation_year, faculty_id: @vehicle.faculty_id, license_number: @vehicle.license_number, make: @vehicle.make, model: @vehicle.model, permits_permit_id: @vehicle.permits_permit_id, state_licensed: @vehicle.state_licensed, student_id: @vehicle.student_id, year: @vehicle.year } }
     end
 
     assert_redirected_to vehicle_url(Vehicle.last)
@@ -34,7 +34,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vehicle" do
-    patch vehicle_url(@vehicle), params: { vehicle: { color: @vehicle.color, experation_year: @vehicle.experation_year, faculty_auID: @vehicle.faculty_auID, license_number: @vehicle.license_number, make: @vehicle.make, model: @vehicle.model, permits_permit_number: @vehicle.permits_permit_number, state_licensed: @vehicle.state_licensed, students_auID: @vehicle.students_auID, year: @vehicle.year } }
+    patch vehicle_url(@vehicle), params: { vehicle: { color: @vehicle.color, experation_year: @vehicle.experation_year, faculty_id: @vehicle.faculty_id, license_number: @vehicle.license_number, make: @vehicle.make, model: @vehicle.model, permits_permit_id: @vehicle.permits_permit_id, state_licensed: @vehicle.state_licensed, student_id: @vehicle.student_id, year: @vehicle.year } }
     assert_redirected_to vehicle_url(@vehicle)
   end
 

@@ -35,9 +35,9 @@
         <td><%= faculty.new_faculty %></td>
         <td><%= faculty.department %></td>
         <td><%= faculty.office %></td>
-        <td><%= link_to 'Show', faculty %></td>
-        <td><%= link_to 'Edit', edit_faculty_path(faculty) %></td>
-        <td><%= link_to 'Destroy', faculty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', faculty if policy(faculty).show? %></td>
+        <td><%= link_to 'Edit', edit_faculty_path(faculty) if policy(faculty).edit? %></td>
+        <td><%= link_to 'Destroy', faculty, method: :delete, data: { confirm: 'Are you sure?' } if policy(faculty).destroy? %></td>
       </tr>
     <% end %>
   </tbody>

@@ -44,6 +44,8 @@ group :development, :test do
 end
 
 group :development do
+  #Adding rails-erd so we can visualize rail's current interpretation of our data model
+  gem 'rails-erd', require: false
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -56,6 +58,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.3'
-gem 'wdm'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem "pundit"
+gem 'pundit', '~> 1.1'
+gem 'activeadmin', '~> 1.1'

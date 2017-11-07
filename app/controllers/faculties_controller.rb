@@ -6,7 +6,13 @@ class FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    @faculties = Faculty.all
+    if current_user.roles == 'admin'
+      @faculties = Faculty.all
+    elsif user_signed_in?
+      @faculties = Faculty.all.where(:user_id => current_user.id)
+    else
+      @faculties = Faculty.all
+    end
     authorize @faculties
   end
 
@@ -28,7 +34,7 @@ class FacultiesController < ApplicationController
   # POST /faculties
   # POST /faculties.json
   def create
-    @faculty = Faculty.new(faculty_params)
+    @faculty = current_user.build_faculty(faculty_params)
     authorize @faculty
 
     respond_to do |format|
@@ -75,6 +81,6 @@ class FacultiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def faculty_params
-      params.require(:faculty).permit(:last_name, :first_name, :home_address, :city, :state, :zip, :home_phone, :cell_phone, :office_phone, :new_faculty, :department, :office)
+      params.require(:faculty).permit(:faculty_id, :last_name, :first_name, :home_address, :city, :state, :zip, :home_phone, :cell_phone, :office_phone, :new_faculty, :department, :office)
     end
 end

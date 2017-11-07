@@ -4,9 +4,10 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
-/.bundle
-/config/database.yml
+# Ignore bundler config and stubs to save space in repo
+/.bundle/
+/bundler_stubs/
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

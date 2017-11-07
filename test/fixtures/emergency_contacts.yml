@@ -10,8 +10,8 @@ one:
   home_phone: MyString
   cell_phone: MyString
   office_phone: MyString
-  faculty_auID: MyString
-  students_auID: MyString
+  faculty_id: MyString
+  student_id: MyString
 
 two:
   last_name: MyString
@@ -23,5 +23,5 @@ two:
   home_phone: MyString
   cell_phone: MyString
   office_phone: MyString
-  faculty_auID: MyString
-  students_auID: MyString
+  faculty_id: MyString
+  student_id: MyString
