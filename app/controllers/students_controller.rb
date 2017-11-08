@@ -5,10 +5,10 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    if current_user.roles == 'admin'
+    if current_user.roles == 'admin' #checks if user is admin, if so displays all of the students in database.
       @students = Student.all
     elsif user_signed_in?
-      @students = Student.all.where(:user_id => current_user.id)
+      @students = Student.all.where(:user_id => current_user.id) #Only displays the the users student. 
     else
       @students = Student.all
     end
@@ -32,7 +32,7 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = current_user.build_student(student_params)
+    @student = current_user.build_student(student_params) #When createing the student, it connects the current logged in user to the student in the database. 
 
     respond_to do |format|
       if @student.save

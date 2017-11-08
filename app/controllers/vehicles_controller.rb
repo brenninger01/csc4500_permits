@@ -7,10 +7,10 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-     if current_user.roles == 'admin'
+     if current_user.roles == 'admin' #checks if user is admin, if so displays all of the vehicles in database.
       @vehicles = Vehicle.all 
      elsif user_signed_in?
-      @vehicles = Vehicle.all.where(:user_id => current_user.id)
+      @vehicles = Vehicle.all.where(:user_id => current_user.id) #Only displays the the users vehicle.
     else
       @vehicles = Vehicle.all
     end
@@ -35,7 +35,7 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   # POST /vehicles.json
   def create
-    @vehicle = current_user.vehicles.build(vehicle_params)
+    @vehicle = current_user.vehicles.build(vehicle_params) #When creating the vehicle, it connects current logged in user to the created vehicle. 
     authorize @vehicle
 
     respond_to do |format|
