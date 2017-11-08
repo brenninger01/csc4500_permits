@@ -1,15 +1,18 @@
 ActiveAdmin.register Faculty do
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
 
+	filter :faculty_id
+	filter :last_name
+	filter :first_name
+	filter :department
+
+	index do #defines what the index page displays
+		selectable_column
+	    id_column
+	    column :last_name
+	    column :first_name
+	    column :department
+	    column :office
+	    column :user
+	    actions
+  	end
 end
