@@ -25,13 +25,15 @@
             <li><a href="/emergency_contacts">Emergency Contacts</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/students">Students</a></li>
+            <li role="seperator" class="divider"></li>
+            <li><a href="/about">About Us</a></li>
             
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	  
-		<% if user_signed_in? %>
+		<% if user_signed_in? #Checks if user is signed in, if so displays user email and log out button. If logged out then displays log in and sign up button.  %>
       <% if current_user.roles == 'admin' %>
         <li><a href="/admin">Admin</a></li>
       <% end %>

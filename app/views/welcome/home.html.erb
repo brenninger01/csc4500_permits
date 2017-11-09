@@ -1,0 +1,18 @@
+<div class="center jumbotron">
+  <h1 class="h1jumbo">Welcome to Aurora University Campus Safety</h1>
+
+  <h2 class="h2jumbo">
+    This is the home page for the
+    <a href="http://www.aurora.edu/">Aurora University</a>
+    Campus Safety Parking Permits
+  </h2>
+  <% if user_signed_in? #will only display the log in buttons if no one is logged in, other wise will not show up at all. %>
+  <% else %>
+    <%# for us signup_path does not work, so we used signup instead %>
+    <h2 class="h2jumbo">For first time users please sign up below. For returning users please sign in at the top right corner or click below. 
+    </h2>   
+    <%= link_to "Signup click here", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Login click here", new_user_session_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
+</div>
