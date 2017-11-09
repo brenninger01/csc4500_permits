@@ -42,7 +42,7 @@
         <td><%= student.new_student %></td>
         <td><%= student.returning_student %></td>
         <td><%= student.athletic_team %></td>
-        <td><%= link_to 'Show', student if policy(student).show? %></td>
+        <td><%= link_to 'Show', student if policy(student).show? || policy(student).edit? %></td>
         <td><%= link_to 'Edit', edit_student_path(student) if policy(student).edit? %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } if policy(student).destroy? %></td>
       </tr>

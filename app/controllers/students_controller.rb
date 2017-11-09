@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    if current_user.roles == 'admin' #checks if user is admin, if so displays all of the students in database.
+    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the students in database.
       @students = Student.all
     elsif user_signed_in?
       @students = Student.all.where(:user_id => current_user.id) #Only displays the the users student. 
