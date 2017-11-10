@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :emergency_contacts
   resources :faculties
   resources :students
+  authenticated :user do
+    root 'logged_in_page#home', as: :authenticated_root
+  end
   root to: 'welcome#home'
   get 'welcome/about'
 
