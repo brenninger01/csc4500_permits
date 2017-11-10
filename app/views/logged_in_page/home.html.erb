@@ -27,8 +27,11 @@
 </head>
 <body>
   <h1>Welcome to Campus Saftey Permits</h1>
-  <h2><%= current_user.student.first_name + " " + current_user.student.last_name%></h2>
-
+    <% if current_user.position == 'Student' %>
+      <h2><%= current_user.student.first_name + " " + current_user.student.last_name%></h2>
+    <% elsif current_user.position == 'Faculty' %>
+      <h2><%= current_user.faculty.first_name + " " + current_user.faculty.last_name%></h2>
+    <% end %>
 <div class="right">
 <div class="container">
     <div class="row">
