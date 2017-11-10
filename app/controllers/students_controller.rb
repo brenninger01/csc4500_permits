@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  after_action :verify_authorized
 
   # GET /students
   # GET /students.json
@@ -12,6 +13,7 @@ class StudentsController < ApplicationController
     else
       @students = Student.all
     end
+    authorize @students
   end
 
   # GET /students/1
@@ -23,6 +25,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    authorize @student
   end
 
   # GET /students/1/edit
@@ -73,6 +76,7 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+      authorize @student
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

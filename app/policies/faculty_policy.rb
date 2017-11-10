@@ -1,6 +1,8 @@
 class FacultyPolicy < ApplicationPolicy
 	def index?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.position == 'Faculty'
 	end
 
 	def new?
