@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-	permit_params :roles, :password, :password_confirmation
+	permit_params :roles, :password, :password_confirmation, :position
 	filter :email
   filter :roles
 
@@ -10,6 +10,7 @@ ActiveAdmin.register User do
     column :last_sign_in_at
     column :sign_in_count
     column :roles
+    column :position
     actions
   end
 
@@ -18,7 +19,8 @@ ActiveAdmin.register User do
       	f.input :email
       	f.input :password
       	f.input :password_confirmation
-      	f.input :roles
+      	f.input :roles, :as => :select, :collection => ["standard", "editor", "admin"]
+        f.input :position, :as => :select, :collection => ["Student", "Faculty"]
     	end
     	f.actions
   	end
