@@ -2,15 +2,19 @@ class StudentPolicy < ApplicationPolicy
 	def index?
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
-		user.present? && user.position == 'Student'
+		user.present? && user.student?
 	end
 
 	def new?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.student?
 	end
 
 	def create?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		return true if user.present? && user.student?
 	end
 
 	def admin_show?

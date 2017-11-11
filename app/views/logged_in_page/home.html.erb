@@ -53,7 +53,7 @@
                         <hr>
                         <li class="nav-header" style = "font-size: 24px;">Emergency Contact</li>
                         <hr>
-                        <li>Primary Contact:<br> Contact Goes Here</li>
+                        <li>Primary Contact:<br> <%= current_user.emergency_contact.first_name + " " + current_user.emergency_contact.last_name if current_user.emergency_contact.present? %></li>
                     </ul>
                 </div>
         </div>

@@ -6,7 +6,13 @@ class EmergencyContactsController < ApplicationController
   # GET /emergency_contacts
   # GET /emergency_contacts.json
   def index
-    @emergency_contacts = EmergencyContact.all
+    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the students in database.
+      @emergency_contacts = EmergencyContact.all
+    elsif user_signed_in?
+      @emergency_contacts = EmergencyContact.all.where(:user_id => current_user.id) #Only displays the the users student. 
+    else
+      @emergency_contacts = EmergencyContact.all
+    end
     authorize @emergency_contacts
   end
 
@@ -28,7 +34,11 @@ class EmergencyContactsController < ApplicationController
   # POST /emergency_contacts
   # POST /emergency_contacts.json
   def create
-    @emergency_contact = current_user.build_emergency_contact(emergency_contact_params)
+    if current_user.student?
+      @emergency_contact = current_user.build_emergency_contact(emergency_contact_params.merge({student_id: current_user.student.student_id}))
+    elsif current_user.faculty?
+      @emergency_contact = current_user.build_emergency_contact(emergency_contact_params.merge({faculty_id: current_user.faculty.faculty_id}))  
+    end
     authorize @emergency_contact
 
     respond_to do |format|
