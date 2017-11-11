@@ -14,4 +14,6 @@ ActiveAdmin.register Student do
 permit_params :student_id
 config.sort_order = 'student_id'
 
+filter :email
+
 end
