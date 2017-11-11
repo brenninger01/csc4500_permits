@@ -35,7 +35,12 @@ class VehiclesController < ApplicationController
   # POST /vehicles
   # POST /vehicles.json
   def create
-    @vehicle = current_user.vehicles.build(vehicle_params) #When creating the vehicle, it connects current logged in user to the created vehicle. 
+    if current_user.student?
+      @vehicle = current_user.vehicles.build(vehicle_params.merge({student_id: current_user.student.student_id})) #When creating the vehicle, it connects current logged in user to the created vehicle. 
+                    #Also inputs the current logged in user student_ID or faculty_ID into the appropriate vehicle field 
+    elsif current_user.faculty?
+      @vehicle = current_user.vehicles.build(vehicle_params.merge({faculty_id: current_user.faculty.faculty_id}))
+    end
     authorize @vehicle
 
     respond_to do |format|
