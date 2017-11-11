@@ -22,4 +22,12 @@ class User < ApplicationRecord
   	roles == "standard"
   end
 
+  def student?
+    position == "Student"
+  end
+
+  def faculty?
+    position == "Faculty"
+  end
+
 end

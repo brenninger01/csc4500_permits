@@ -10,14 +10,7 @@
       <th>Home city</th>
       <th>Home state</th>
       <th>Home zip</th>
-      <th>School year address</th>
-      <th>School year city</th>
-      <th>School year zip</th>
-      <th>Room number</th>
-      <th>Home phone</th>
       <th>Cell phone</th>
-      <th>New student</th>
-      <th>Returning student</th>
       <th>Athletic team</th>
       <th colspan="3"></th>
     </tr>
@@ -33,14 +26,7 @@
         <td><%= student.home_city %></td>
         <td><%= student.home_state %></td>
         <td><%= student.home_zip %></td>
-        <td><%= student.school_year_address %></td>
-        <td><%= student.school_year_city %></td>
-        <td><%= student.school_year_zip %></td>
-        <td><%= student.room_number %></td>
-        <td><%= student.home_phone %></td>
         <td><%= student.cell_phone %></td>
-        <td><%= student.new_student %></td>
-        <td><%= student.returning_student %></td>
         <td><%= student.athletic_team %></td>
         <td><%= link_to 'Show', student if policy(student).show? || policy(student).edit? %></td>
         <td><%= link_to 'Edit', edit_student_path(student) if policy(student).edit? %></td>

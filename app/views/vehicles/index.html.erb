@@ -11,8 +11,12 @@
       <th>State licensed</th>
       <th>Experation year</th>
       <th>Permits permit number</th>
+      <% if current_user.faculty? || (current_user.admin? || current_user.editor?)%>
       <th>Faculty auid</th>
+      <% end %>
+      <%if current_user.student? || (current_user.admin? || current_user.editor?)%>
       <th>Students auid</th>
+      <% end %> 
       <th>Vehicle User ID </th>
       <th colspan="3"></th>
     </tr>
@@ -28,9 +32,13 @@
         <td><%= vehicle.license_number %></td>
         <td><%= vehicle.state_licensed %></td>
         <td><%= vehicle.experation_year %></td>
-        <td><%= vehicle.permit_id %></td>
-        <td><%= vehicle.faculty_id %></td>
-        <td><%= vehicle.student_id %></td>
+        <td><%= vehicle.permit_id %></td> 
+        <% if current_user.faculty? || (current_user.admin? || current_user.editor?) %>
+          <td><%= vehicle.faculty_id %></td>
+        <% end %>
+        <% if current_user.student? || (current_user.admin? || current_user.editor?) %>
+          <td><%= vehicle.student_id %></td>
+        <% end %>
         <td><%= vehicle.user_id %></td>
         <td><%= link_to 'Show', vehicle if policy(vehicle).show? %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) if policy(vehicle).edit? %></td>
