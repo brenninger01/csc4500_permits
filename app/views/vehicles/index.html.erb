@@ -61,5 +61,5 @@
 <br>
 
 <% if policy(Vehicle).new? %>
-<%= link_to 'New Vehicle', new_vehicle_path %>
+<%= link_to 'New Vehicle', new_vehicle_path if (current_user.vehicles.empty? || current_user.faculty? || (current_user.admin? || current_user.editor?)) %>
 <% end %>

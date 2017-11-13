@@ -36,6 +36,7 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = current_user.build_student(student_params) #When createing the student, it connects the current logged in user to the student in the database. 
+    authorize @student
 
     respond_to do |format|
       if @student.save

@@ -14,7 +14,7 @@ class StudentPolicy < ApplicationPolicy
 	def create?
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
-		return true if user.present? && user.student?
+		user.present? && user.student?
 	end
 
 	def admin_show?

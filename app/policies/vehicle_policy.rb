@@ -4,7 +4,8 @@ class VehiclePolicy < ApplicationPolicy
 	end
 
 	def new?
-		true
+		true 
+
 	end
 
 	def create?

@@ -47,7 +47,11 @@
                         <hr>
                         <li style = "font-size: 18px;">  Registered Vehicle: <br />
                           <% if current_user.vehicles.present? %>
-                          <%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%>
+                            <%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%>
+                            <% if current_user.vehicles.first.model != current_user.vehicles.last.model %>
+                              <%= current_user.vehicles.last.year + " " + current_user.vehicles.last.make + " " + current_user.vehicles.last.model %>
+                            <% end %>
+
                           <% end %>
                         </li>
                         <hr>
