@@ -1,5 +1,15 @@
 <h1>Vehicles</h1>
 
+<% if current_user.admin? || current_user.editor? %>
+  <%= form_tag(vehicles_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Vehicles" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  <% if @vehicles.empty? %>
+    <p>There are no vehicles containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
+<% end %>
+
 <table>
   <thead>
     <tr>

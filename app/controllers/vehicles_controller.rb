@@ -7,8 +7,13 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-     if current_user.roles == 'admin' #checks if user is admin, if so displays all of the vehicles in database.
+     if current_user.admin? || current_user.editor? #checks if user is admin, if so displays all of the vehicles in database.
       @vehicles = Vehicle.all 
+      if params[:search]
+        @vehicles = Vehicle.search(params[:search]).order("created_at DESC")
+      else
+        @vehicles = Vehicle.all.order('created_at DESC')
+      end
      elsif user_signed_in?
       @vehicles = Vehicle.all.where(:user_id => current_user.id) #Only displays the the users vehicle.
     else

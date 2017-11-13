@@ -1,14 +1,14 @@
 class PermitPolicy < ApplicationPolicy
 	def index?
-		true
+		return true if user.admin? || user.editor?
 	end
 
 	def new?
-		true
+		return true if user.admin? || user.editor?
 	end
 
 	def create?
-		true
+		return true if user.admin? || user.editor?
 	end
 
 	def admin_show?

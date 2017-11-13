@@ -32,7 +32,7 @@ ActiveAdmin.register Faculty do
 
   	form do |f|
   		f.inputs do
-  			f.input :user, :collection => User.all.map{ |user| [user.email]}
+  			f.input :user, :collection => User.all.map{ |user| [user.email]} 
   			f.input :faculty_id
   			f.input :last_name
   			f.input :first_name
