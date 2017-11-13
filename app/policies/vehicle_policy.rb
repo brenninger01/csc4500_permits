@@ -4,12 +4,26 @@ class VehiclePolicy < ApplicationPolicy
 	end
 
 	def new?
-		true 
+		if (user.faculty? && user.vehicles.count <2)
+			true
+		elsif (user.student? && user.vehicles.count <1)
+			true
+		elsif (user.admin? || user.editor?)
+			true
+		else
+			false
+		end
 
 	end
 
 	def create?
-		true
+		if (user.faculty? && user.vehicles.count <2)
+			true
+		elsif (user.student? && user.vehicles.count <1)
+			true
+		elsif (user.admin? || user.editor?)
+			true
+		end
 	end
 
 	def admin_show?
@@ -24,6 +38,12 @@ class VehiclePolicy < ApplicationPolicy
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?) 
 		user.present? && user == record.user
 	end
+	
+	def update?
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?) 
+		user.present? && user == record.user
+	end
+
 	def show?
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?) 
 		user.present? && user == record.user
