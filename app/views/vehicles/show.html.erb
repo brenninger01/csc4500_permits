@@ -53,5 +53,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Edit | ', edit_vehicle_path(@vehicle) if policy(@vehicle).edit? %> 
 <%= link_to 'Back', vehicles_path %>

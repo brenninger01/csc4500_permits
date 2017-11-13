@@ -22,8 +22,13 @@ ActiveAdmin.register EmergencyContact do
          #emergency_contact_path(faculty)
       #end
       	row :faculty do |emergency_contact|
-      		link_to emergency_contact.faculty.first_name + " " + emergency_contact.faculty.last_name,
-      			admin_faculty_path(emergency_contact.faculty_id)
+          if emergency_contact.faculty.present?
+      		  link_to emergency_contact.faculty.first_name + " " + emergency_contact.faculty.last_name,
+      			 admin_faculty_path(emergency_contact.faculty_id)
+          elsif emergency_contact.student.present?
+            link_to emergency_contact.student.first_name + " " + emergency_contact.student.last_name,
+             admin_faculty_path(emergency_contact.student_id)
+           end
       	end
       	row :address
       	row :city

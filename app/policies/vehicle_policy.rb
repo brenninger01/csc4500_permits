@@ -36,12 +36,12 @@ class VehiclePolicy < ApplicationPolicy
 
 	def edit?
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?) 
-		user.present? && user == record.user
+		#user.present? && user == record.user
 	end
 	
 	def update?
 		return true if (user.present? && user.admin?) || (user.present? && user.editor?) 
-		user.present? && user == record.user
+		#user.present? && user == record.user
 	end
 
 	def show?

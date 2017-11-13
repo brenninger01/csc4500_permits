@@ -16,4 +16,16 @@ config.sort_order = 'student_id'
 
 filter :email
 
+index do #defines what the index page displays
+		selectable_column
+	    id_column
+	    column :last_name
+	    column :first_name
+	    column :home_address
+	    column :home_city
+	    column :user
+	    column :emergency_contact
+	    actions
+  	end
+
 end

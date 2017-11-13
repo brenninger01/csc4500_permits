@@ -21,8 +21,6 @@ class PermitPolicy < ApplicationPolicy
 
 	def edit?
 		return true if user.present? && user.admin?
-
-		user.present? && user == record.user
 	end
 
 	private
