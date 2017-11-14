@@ -64,6 +64,11 @@
 </p>
 
 <p>
+  <strong>Emergency Contact:</strong>
+  <%= link_to @student.emergency_contact.first_name + " " + @student.emergency_contact.last_name, emergency_contact_path(@student.emergency_contact.contact_id) %>
+</p>
+
+<p>
   <strong>New student:</strong>
   <%= @student.new_student %>
 </p>
@@ -72,6 +77,7 @@
   <strong>Returning student:</strong>
   <%= @student.returning_student %>
 </p>
+
 
 <p>
   <strong>Athletic team:</strong>

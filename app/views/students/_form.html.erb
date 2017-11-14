@@ -12,8 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :ID %>
-    <%= form.text_field :student_id, id: :student_student_id , :required => 'required', placeholder: "Required" %>
+    <% unless @student.persisted? %>
+      <%= form.label :ID %>
+      <%= form.text_field :student_id, id: :student_student_id , :required => 'required', placeholder: "Required" %>
+    <% end %>
   </div>
 
   <div class="field">
