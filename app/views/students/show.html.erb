@@ -65,7 +65,7 @@
 
 <p>
   <strong>Emergency Contact:</strong>
-  <%= link_to @student.emergency_contact.first_name + " " + @student.emergency_contact.last_name, emergency_contact_path(@student.emergency_contact.contact_id) %>
+  <%= link_to @student.emergency_contact.first_name + " " + @student.emergency_contact.last_name, emergency_contact_path(@student.emergency_contact.contact_id) if @student.emergency_contact.present? %>
 </p>
 
 <p>

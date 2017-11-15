@@ -32,4 +32,27 @@ ActiveAdmin.register Vehicle do
   		f.actions
   	end
 
+    show do
+      attributes_table do
+        row :vehicle_id
+        row :user
+        row :year
+        row :color
+        row :make
+        row :model
+        row :license_number
+        row :state_licensed
+        row :experation_year
+        row :permit
+        row :student
+        row :faculty do |vehicle|
+          if vehicle.faculty.present?
+            link_to vehicle.faculty.first_name + " " + vehicle.faculty.last_name,
+             admin_faculty_path(vehicle.faculty_id)
+          end
+        end
+      end
+      active_admin_comments
+    end
+
 end

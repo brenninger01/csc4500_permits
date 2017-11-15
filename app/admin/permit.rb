@@ -20,7 +20,19 @@ ActiveAdmin.register Permit do
 	    column :issued_by
 	    column :date_entered
 	    column :entered_by
+	    column :vehicle
 	    actions
+	end
+
+	show do
+		attributes_table do
+			row :permit_id
+			row :date_issued
+			row :issued_by
+			row :date_entered
+			row :entered_by
+			row :vehicle
+		end
 	end
 
 	form do |f|

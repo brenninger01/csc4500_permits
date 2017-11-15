@@ -1,6 +1,6 @@
 class Permit < ApplicationRecord
 	self.primary_key = :permit_id
-	belongs_to	:user
+	belongs_to	:user, optional: true
 	has_one	:vehicle
 
 	def self.search(search)

@@ -17,25 +17,21 @@ ActiveAdmin.register EmergencyContact do
   		#id_column
   		row :last_name
   		row :first_name
-  		#row :# do |faculty|
-  			#link_to faculty.emergency_contact.first_name + ' '+ faculty.emergency_contact.last_name,
-         #emergency_contact_path(faculty)
-      #end
-      	row :faculty do |emergency_contact|
-          if emergency_contact.faculty.present?
-      		  link_to emergency_contact.faculty.first_name + " " + emergency_contact.faculty.last_name,
-      			 admin_faculty_path(emergency_contact.faculty_id)
-          elsif emergency_contact.student.present?
-            link_to emergency_contact.student.first_name + " " + emergency_contact.student.last_name,
-             admin_faculty_path(emergency_contact.student_id)
-           end
-      	end
-      	row :address
-      	row :city
-      	row :state
-      	row :home_phone
-      	row :cell_phone
-      	row :office_phone
+      row :faculty do |emergency_contact|
+        link_to emergency_contact.faculty.first_name + " " + emergency_contact.faculty.last_name,
+          admin_faculty_path(emergency_contact.faculty_id) if emergency_contact.faculty.present?
+      end
+      row :student do |emergency_contact| 
+        link_to emergency_contact.student.first_name + " " + emergency_contact.student.last_name,
+          admin_student_path(emergency_contact.student_id) if emergency_contact.student.present?
+      end
+
+    	row :address
+    	row :city
+    	row :state
+    	row :home_phone
+    	row :cell_phone
+    	row :office_phone
   	end
   end
 end
