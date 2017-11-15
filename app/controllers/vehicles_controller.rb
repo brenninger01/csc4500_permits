@@ -7,8 +7,13 @@ class VehiclesController < ApplicationController
   # GET /vehicles
   # GET /vehicles.json
   def index
-     if current_user.roles == 'admin' #checks if user is admin, if so displays all of the vehicles in database.
+     if current_user.admin? || current_user.editor? #checks if user is admin, if so displays all of the vehicles in database.
       @vehicles = Vehicle.all 
+      if params[:search]
+        @vehicles = Vehicle.search(params[:search]).order("created_at DESC")
+      else
+        @vehicles = Vehicle.all.order('created_at DESC')
+      end
      elsif user_signed_in?
       @vehicles = Vehicle.all.where(:user_id => current_user.id) #Only displays the the users vehicle.
     else
@@ -87,6 +92,6 @@ class VehiclesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vehicle_params
-      params.require(:vehicle).permit(:year, :color, :make, :model, :license_number, :state_licensed, :experation_year, :permits_permit_id, :faculty_id, :student_id)
+      params.require(:vehicle).permit(:year, :color, :make, :model, :license_number, :state_licensed, :experation_year, :permit_id, :faculty_id, :student_id)
     end
 end

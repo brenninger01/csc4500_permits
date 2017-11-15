@@ -12,23 +12,18 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :permit_id %>
+    <%= form.text_field :permit_id, id: :permit_permit_id %>
+  </div>
+
+  <div class="field">
     <%= form.label :date_issued %>
-    <%= form.text_field :date_issued, id: :permit_date_issued %>
+    <%= form.date_field :date_issued, id: :permit_date_issued %>
   </div>
 
   <div class="field">
     <%= form.label :issued_by %>
     <%= form.text_field :issued_by, id: :permit_issued_by %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_entered %>
-    <%= form.text_field :date_entered, id: :permit_date_entered %>
-  </div>
-
-  <div class="field">
-    <%= form.label :entered_by %>
-    <%= form.text_field :entered_by, id: :permit_entered_by %>
   </div>
 
   <div class="actions">

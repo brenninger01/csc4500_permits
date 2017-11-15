@@ -16,12 +16,12 @@
       <ul class="nav navbar-nav">
         <li class="active">
           <% if user_signed_in? %>
-            <% if current_user.roles == "editor" || current_user.roles == "admin" %>
+            <% if current_user.editor? || current_user.admin? %>
               <li><a href="/faculties">Faculty <span class="sr-only">(current)</span></a></li>
               <li><a href="/students">Students</a></li>
-            <% elsif current_user.position == 'Student' %>
+            <% elsif current_user.student? %>
               <a href="/students">Students</a>
-            <% elsif  current_user.position == 'Faculty'  %>
+            <% elsif  current_user.faculty?  %>
               <a href="/faculties">Faculty <span class="sr-only">(current)</span></a>
             <% end %>
           <li><a href="/vehicles">Vehicles</a></li>

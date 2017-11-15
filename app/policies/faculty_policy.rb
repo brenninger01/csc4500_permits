@@ -17,16 +17,22 @@ class FacultyPolicy < ApplicationPolicy
 		user.present? && user.faculty?
 	end
 
+	def show?
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user == record.user
+	end
+
 	def admin_show?
 		user.present? && user.admin?
 	end
 
 	def destroy?
-		user.present? && user.admin?
+		false
 	end
 
 	def edit?
-		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+		#return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
 		user.present? && user == record.user
 	end
