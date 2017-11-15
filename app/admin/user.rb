@@ -25,11 +25,23 @@ ActiveAdmin.register User do
     	f.actions
   	end
 
-  	controller do #allows the password fields to be blank and update the user email 
-  		def update_resource(object, attributes)
-    		update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
-    		object.send(update_method, *attributes)
-  		end
+  controller do #allows the password fields to be blank and update the user email 
+		def update_resource(object, attributes)
+  		update_method = attributes.first[:password].present? ? :update_attributes : :update_without_password
+  		object.send(update_method, *attributes)
+		end
 	end
+
+  show do
+    attributes_table do
+      row :email
+      row :roles
+      row :position
+      row :last_sign_in_at
+      row :created_at
+      row :updated_at
+      row :last_sign_in_ip
+    end
+  end
 
 end

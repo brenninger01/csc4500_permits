@@ -33,5 +33,6 @@ ActiveAdmin.register EmergencyContact do
     	row :cell_phone
     	row :office_phone
   	end
+    active_admin_comments
   end
 end

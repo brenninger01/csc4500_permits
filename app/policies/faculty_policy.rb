@@ -28,11 +28,11 @@ class FacultyPolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		user.present? && user.admin?
+		false
 	end
 
 	def edit?
-		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+		#return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
 		user.present? && user == record.user
 	end
