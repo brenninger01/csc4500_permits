@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.fields_for :vehicle do |f| %>
       <%= f.label :license_number %>
-      <%= f.select :license_number, @vehicle.collect{ |car| [car.license_number, car.vehicle_id]} %>
+      <%= f.collection_select :license_number, Vehicle.order(:license_number), :license_number, :license_number, include_blank: true %>
     <% end %>
   </div>
 
