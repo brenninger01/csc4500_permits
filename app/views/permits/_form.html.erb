@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="field">
+    <%= form.fields_for :vehicle do |f| %>
+      <%= f.label :license_number %>
+      <%= f.select :license_number, @vehicle.collect{ |car| [car.license_number, car.vehicle_id]} %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :permit_id %>
     <%= form.text_field :permit_id, id: :permit_permit_id %>
   </div>
@@ -24,7 +31,7 @@
   <div class="field">
     <%= form.label :issued_by %>
     <%= form.text_field :issued_by, id: :permit_issued_by %>
-  </div>
+  </div> 
 
   <div class="actions">
     <%= form.submit %>

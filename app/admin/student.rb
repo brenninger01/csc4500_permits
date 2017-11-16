@@ -11,8 +11,8 @@ ActiveAdmin.register Student do
 		column :first_name
 		column :home_address
 		column :home_city
-		column :user
-		column :emergency_contact
+		column :home_phone
+		column :cell_phone
 		actions
 	end
 
@@ -36,6 +36,10 @@ ActiveAdmin.register Student do
 			row :new_student
 			row :returning_student
 			row :athletic_team
+			row :emergency_contact do |student|
+				link_to student.emergency_contact.first_name + " " + student.emergency_contact.last_name,
+					admin_emergency_contact_path(student.emergency_contact.contact_id) if student.emergency_contact.present?
+			end
 		end
 		active_admin_comments
 	end

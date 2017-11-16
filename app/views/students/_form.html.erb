@@ -50,17 +50,17 @@
 
   <div class="field">
     <%= form.label :school_year_address %>
-    <%= form.text_field :school_year_address, id: :student_school_year_address, placeholder: "Optional" %>
+    <%= form.text_field :school_year_address, id: :student_school_year_address, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :school_year_city %>
-    <%= form.text_field :school_year_city, id: :student_school_year_city, placeholder: "Optional" %>
+    <%= form.text_field :school_year_city, id: :student_school_year_city, :required => 'Required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :school_year_zip %>
-    <%= form.text_field :school_year_zip, id: :student_school_year_zip, placeholder: "Optional" %>
+    <%= form.text_field :school_year_zip, id: :student_school_year_zip, :required => 'Required',placeholder: "Required" %>
   </div>
 
   <div class="field">
