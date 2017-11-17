@@ -20,7 +20,14 @@ class PermitPolicy < ApplicationPolicy
 	end
 
 	def edit?
+		return true if user.admin? || user.editor?
+
 		return true if user.present? && user.admin?
+	end
+
+	def update?
+		return true if user.admin? || user.editor?
+
 	end
 
 	private

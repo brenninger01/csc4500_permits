@@ -21,11 +21,11 @@ class EmergencyContactPolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		user.present? && user.admin?
+		false
 	end
 
 	def edit?
-		return true if user.present? && user.admin?
+		#return true if user.present? && user.admin?
 
 		user.present? && user == record.user
 	end

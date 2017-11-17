@@ -23,20 +23,29 @@ class PermitsController < ApplicationController
   # GET /permits/new
   def new
     @permit = Permit.new
+    @vehicle = @permit.build_vehicle
+    @vehicle = Vehicle.all
     authorize @permit
   end
 
   # GET /permits/1/edit
   def edit
+    @vehicle = @permit.build_vehicle
   end
 
   # POST /permits
   # POST /permits.json
   def create
+
+    vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
     if current_user.faculty?
-      @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today, entered_by: current_user.faculty.first_name + " " + current_user.faculty.last_name))
+      @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today, 
+        entered_by: current_user.faculty.first_name + " " + current_user.faculty.last_name))
+      @permit.update(vehicle: vehicle)
     elsif current_user.student?
-      @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today, entered_by: current_user.student.first_name + " " + current_user.student.last_name))
+      @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today,
+       entered_by: current_user.student.first_name + " " + current_user.student.last_name))
+      @permit.update(vehicle: vehicle)
     end
     authorize @permit
 
@@ -54,8 +63,11 @@ class PermitsController < ApplicationController
   # PATCH/PUT /permits/1
   # PATCH/PUT /permits/1.json
   def update
+    vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
+    
     respond_to do |format|
       if @permit.update(permit_params)
+        @permit.update(vehicle: vehicle)
         format.html { redirect_to @permit, notice: 'Permit was successfully updated.' }
         format.json { render :show, status: :ok, location: @permit }
       else
@@ -84,6 +96,6 @@ class PermitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def permit_params
-      params.require(:permit).permit(:permit_id, :date_issued, :issued_by, :date_entered, :entered_by)
+      params.require(:permit).permit(:permit_id, :date_issued, :issued_by, :date_entered, :entered_by, vehicle_attributes: [:license_number])
     end
 end

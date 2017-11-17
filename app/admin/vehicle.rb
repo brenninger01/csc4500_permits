@@ -24,27 +24,36 @@ ActiveAdmin.register Vehicle do
   			f.input :license_number
   			f.input :state_licensed
   			f.input :experation_year
-  			f.input :permit_id, :collection => Permit.all.map{ |permit| [permit.permit_id]}
-  			f.input :student_id, :collection => Student.all.map{ |student| [student.student_id]}
+  			f.input :permit_id, :collection => Permit.all.map{ |permit| [permit.permit_id]}, :optional => true
+  			f.input :student_id, :collection => Student.all.map{ |student| [student.student_id]}, :optional => true
   			f.input :faculty_id, :collection => Faculty.all.map{ |faculty| [faculty.faculty_id]}, :optional => true
 
   		end
   		f.actions
   	end
 
-    show do
+    show title: :license_number  do
       attributes_table do
         row :vehicle_id
+        row "License" do |vehicle|
+          vehicle.license_number
+        end
         row :user
         row :year
         row :color
         row :make
         row :model
-        row :license_number
         row :state_licensed
-        row :experation_year
+        row "Expiration year" do |vehicle|
+          vehicle.experation_year
+        end
         row :permit
-        row :student
+        row :student do |vehicle|
+          if vehicle.student.present?
+            link_to vehicle.student.first_name + " " + vehicle.student.last_name,
+              admin_faculty_path(vehicle.student_id)
+          end
+        end
         row :faculty do |vehicle|
           if vehicle.faculty.present?
             link_to vehicle.faculty.first_name + " " + vehicle.faculty.last_name,
@@ -53,6 +62,17 @@ ActiveAdmin.register Vehicle do
         end
       end
       active_admin_comments
+    end
+
+    index do
+      selectable_column
+      id_column
+      column :year
+      column :color
+      column :make
+      column :model
+      column :license_number
+      actions
     end
 
 end
