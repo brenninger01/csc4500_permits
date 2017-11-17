@@ -19,6 +19,8 @@ class FacultiesController < ApplicationController
   # GET /faculties/1
   # GET /faculties/1.json
   def show
+    @faculties = Faculty.find(params[:id])
+    @vehicles = @faculties.vehicles
   end
 
   # GET /faculties/new

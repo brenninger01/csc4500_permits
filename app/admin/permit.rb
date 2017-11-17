@@ -1,4 +1,4 @@
-ActiveAdmin.register Permit do
+ ActiveAdmin.register Permit do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -31,7 +31,9 @@ ActiveAdmin.register Permit do
 			row :issued_by
 			row :date_entered
 			row :entered_by
-			row :vehicle
+			row :vehicle do |permit|
+				link_to permit.vehicle.license_number, admin_vehicle_path(permit.vehicle.vehicle_id) if permit.vehicle.present?
+			end
 		end
 	end
 

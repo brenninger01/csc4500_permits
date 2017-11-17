@@ -59,5 +59,13 @@
   <%= @faculty.office %>
 </p>
 
+  <% @vehicles.each do |vehicle| %>
+  <p>
+    <strong>Vehicle: </strong>
+    <%= link_to vehicle.license_number, vehicle_path(vehicle.vehicle_id) %>
+  </p>
+  <% end %>
+
+
 <%= link_to 'Edit', edit_faculty_path(@faculty) if policy(@faculty).edit? %> |
 <%= link_to 'Back', faculties_path %>
