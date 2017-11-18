@@ -12,6 +12,7 @@
 #   permitted
 # end
 	filter :permit_id
+	permit_params :permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
 
 	index do #defines what the index page displays
 		selectable_column
@@ -39,11 +40,11 @@
 
 	form do |f|
   		f.inputs do
-  			f.input :user, :collection => User.all.map{ |user| [user.email]}
   			f.input :permit_id
-  			f.input :date_issued
+  			#f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			f.input :date_issued, as :date_time_picker
   			f.input :issued_by
-  			f.input :date_entered
+  			f.input :date_entered, as :date_time_picker
   			f.input :entered_by
   		end
   		f.actions
