@@ -42,9 +42,9 @@
   		f.inputs do
   			f.input :permit_id
   			#f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
-  			f.input :date_issued, as :date_time_picker
+  			f.input :date_issued
   			f.input :issued_by
-  			f.input :date_entered, as :date_time_picker
+  			f.input :date_entered
   			f.input :entered_by
   		end
   		f.actions
