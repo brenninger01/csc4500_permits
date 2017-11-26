@@ -24,7 +24,7 @@ ActiveAdmin.register Vehicle do
   			f.input :license_number
   			f.input :state_licensed
   			f.input :experation_year
-  			f.input :permit_id, :collection => Permit.all.map{ |permit| [permit.permit_id]}, :optional => true
+  			f.input :permit_id, :collection => Permit.all.map{ |permit| [permit.permit_id]}, :optional => true, include_blank: true
   			f.input :student_id, :collection => Student.all.map{ |student| [student.student_id]}, :optional => true, include_blank: true
   			f.input :faculty_id, :collection => Faculty.all.map{ |faculty| [faculty.faculty_id]}, :optional => true, include_blank: true
 

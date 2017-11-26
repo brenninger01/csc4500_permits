@@ -26,7 +26,7 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Welcome to Campus Saftey Permits</h1>
+  <h1>Welcome to Campus Safety Permits</h1>
     <% if current_user.student? && current_user.student.present? %>
       <h2><%= link_to current_user.student.first_name + " " + current_user.student.last_name, student_path(current_user.student.student_id) %></h2>
     <% elsif current_user.faculty? && current_user.faculty.present? %>

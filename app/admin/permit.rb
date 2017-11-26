@@ -41,13 +41,29 @@
 	form do |f|
   		f.inputs do
   			f.input :permit_id
-  			#f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
-  			f.input :date_issued
+  			f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			f.input :date_issued, as: :date_picker
   			f.input :issued_by
-  			f.input :date_entered
-  			f.input :entered_by
   		end
   		f.actions
   	end
+
+	controller do
+		def new
+			@permit = Permit.new
+    		@vehicle = @permit.build_vehicle
+    		@vehicle = Vehicle.all 
+    		super 
+    	end	
+
+    	def create
+
+    		 #vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
+    		 @permit.entered_by = current_admin_user
+    		 @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today, 
+        		entered_by: current_user_admin.email))
+    		 super
+    	end
+    end
 
 end
