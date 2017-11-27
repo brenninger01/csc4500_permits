@@ -14,7 +14,6 @@ ActiveAdmin.register EmergencyContact do
 
 	show do
   	attributes_table do
-  		#id_column
   		row :last_name
   		row :first_name
       row :faculty do |emergency_contact|
@@ -35,4 +34,17 @@ ActiveAdmin.register EmergencyContact do
   	end
     active_admin_comments
   end
+
+  index do
+    selectable_column
+    id_column
+    column :last_name
+    column :first_name
+    column :address
+    column :city
+    column :home_phone
+    column :cell_phone
+    actions
+  end
+
 end

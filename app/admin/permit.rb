@@ -11,8 +11,10 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+	before_action :set_permit, only: [:show, :edit, :update, :destroy]
 	filter :permit_id
-	permit_params :permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
+	permit_params :utf8, :permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
+
 
 	index do #defines what the index page displays
 		selectable_column
@@ -40,8 +42,8 @@
 
 	form do |f|
   		f.inputs do
-  			f.input :permit_id
   			f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			f.input :permit_id
   			f.input :date_issued, as: :date_picker
   			f.input :issued_by
   		end
@@ -51,19 +53,25 @@
 	controller do
 		def new
 			@permit = Permit.new
-    		@vehicle = @permit.build_vehicle
-    		@vehicle = Vehicle.all 
-    		super 
+    		@vehicle = @permit.build_vehicle 
     	end	
 
     	def create
-
-    		 #vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
-    		 @permit.entered_by = current_admin_user
-    		 @permit = current_user.permit.build(permit_params.merge(date_entered: Date.today, 
-        		entered_by: current_user_admin.email))
-    		 super
+    		 #@permit = Permit.new
+    		 #vehicle = Vehicle.find_by(permitted_params[:vehicle])
+    		 @vehicle = current_user.permit.build(permitted_params.merge(date_entered: Date.today, 
+        		entered_by: current_admin_user.email))
+    		 #@permit.update(vehicle: vehicle)
+    		 #super
     	end
+
+    	def permittted_params
+    		params.require(:permit).permit!(:permit_id, :date_issued, :issued_by, :date_entered, :entered_by, :utf8, vehicle_attributes: [:license_number])
+    	end
+
+    	def set_permit
+      		@permit = Permit.find(params[:id])
+      	end
     end
 
 end

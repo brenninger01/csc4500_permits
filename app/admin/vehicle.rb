@@ -75,4 +75,19 @@ ActiveAdmin.register Vehicle do
       actions
     end
 
+    controller do
+      def save_resource(object)
+        if object.permit_id = ''
+          object.permit_id = nil
+        end
+        if object.student_id = ''
+          object.student_id = nil
+        end
+        if object.faculty_id = ''
+          object.faculty_id = nil
+        end
+        super
+      end
+    end
+
 end
