@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require_tree .
 //= require jquery-ui
+//= require select2-full

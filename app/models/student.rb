@@ -3,5 +3,6 @@ class Student < ApplicationRecord
 	belongs_to	:user, optional: true
 	has_one	:vehicle
 	has_one	:emergency_contact
-	
+
+
 end

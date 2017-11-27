@@ -1,3 +1,10 @@
+<script>
+  $(document).ready(function() {
+    $('#permit_vehicle_attributes_license_number').select2();
+  });
+
+</script>
+
 <%= form_with(model: permit, local: true) do |form| %>
   <% if permit.errors.any? %>
     <div id="error_explanation">
@@ -14,7 +21,7 @@
   <div class="field">
     <%= form.fields_for :vehicle do |f| %>
       <%= f.label :license_number %>
-      <%= f.collection_select :license_number, Vehicle.order(:license_number), :license_number, :license_number%>
+      <%= f.collection_select( :license_number, Vehicle.order(:license_number), :license_number, :license_number) %>
     <% end %>
   </div>
 

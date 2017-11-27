@@ -26,11 +26,12 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Welcome to Campus Saftey Permits</h1>
+  <h1>Welcome to Campus Safety Permits</h1>
     <% if current_user.student? && current_user.student.present? %>
       <h2><%= link_to current_user.student.first_name + " " + current_user.student.last_name, student_path(current_user.student.student_id) %></h2>
     <% elsif current_user.faculty? && current_user.faculty.present? %>
-      <h2><%= current_user.faculty.first_name + " " + current_user.faculty.last_name%></h2>
+      <h2><%= link_to current_user.faculty.first_name + " " + current_user.faculty.last_name, faculty_path(
+      current_user.faculty.faculty_id) %></h2>
     <% else %>
       <h2>
         <%= link_to "Please click here to enter Personal Info", "students/new" if current_user.student?%>

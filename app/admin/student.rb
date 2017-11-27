@@ -3,6 +3,10 @@ ActiveAdmin.register Student do
 	config.sort_order = 'student_id'
 
 	filter :email
+	permit_params :student_id, :last_name, :first_name, :home_address, :home_city, :home_state,
+		:home_zip, :school_year_address, :school_year_city, :school_year_zip, :room_number,
+		:new_student, :returning_student, :athletic_team, :home_phone, :cell_phone
+
 
 	index do #defines what the index page displays
 		selectable_column
@@ -14,6 +18,28 @@ ActiveAdmin.register Student do
 		column :home_phone
 		column :cell_phone
 		actions
+	end
+
+	form do |f|
+		f.inputs do
+			f.input :student_id
+			f.input :last_name
+			f.input :first_name
+			f.input :home_address
+			f.input :home_city
+			f.input :home_state
+			f.input :home_zip
+			f.input :school_year_address
+			f.input :school_year_city
+			f.input :school_year_zip
+			f.input :room_number
+			f.input :home_phone
+			f.input :cell_phone
+			f.input :new_student
+			f.input :returning_student
+			f.input :athletic_team
+		end
+		f.actions
 	end
 
 	show title: :last_name do

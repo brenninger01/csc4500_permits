@@ -78,10 +78,16 @@
   <%= @student.returning_student %>
 </p>
 
-
 <p>
   <strong>Athletic team:</strong>
   <%= @student.athletic_team %>
+</p>
+
+<p>
+  <strong>Vehicle: </strong>
+  <% if @student.vehicle.present? %>
+    <%= link_to @student.vehicle.license_number , vehicle_path(@student.vehicle.vehicle_id) %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
