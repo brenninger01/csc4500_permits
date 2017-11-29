@@ -12,7 +12,7 @@ ActiveAdmin.register Vehicle do
 #   permitted
 # end
 
-	permit_params :user, :year, :color, :make, :make, :model, :license_number, :state_licensed, :experation_year, :permit_id, :student_id, :faculty_id
+	permit_params :user, :year, :color, :make, :make, :model, :license_number, :state_licensed, :experation_year, :vehicle_permit_id, :student_id, :faculty_id
 
 	form do |f|
   		f.inputs do
@@ -24,7 +24,7 @@ ActiveAdmin.register Vehicle do
   			f.input :license_number
   			f.input :state_licensed
   			f.input :experation_year
-  			f.input :permit_id, :collection => Permit.all.map{ |permit| [permit.permit_id]}, :optional => true, include_blank: true
+  			f.input :vehicle_permit_id, :collection => VehiclePermit.all.map{ |permit| [permit.vehicle_permit_id]}, :optional => true, include_blank: true
   			f.input :student_id, :collection => Student.all.map{ |student| [student.student_id]}, :optional => true, include_blank: true
   			f.input :faculty_id, :collection => Faculty.all.map{ |faculty| [faculty.faculty_id]}, :optional => true, include_blank: true
 
@@ -77,8 +77,8 @@ ActiveAdmin.register Vehicle do
 
     controller do
       def save_resource(object)
-        if object.permit_id = ''
-          object.permit_id = nil
+        if object.vehicle_permit_id = ''
+          object.vehicle_permit_id = nil
         end
         if object.student_id = ''
           object.student_id = nil
