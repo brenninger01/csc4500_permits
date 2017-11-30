@@ -1,19 +1,22 @@
 
 <h1>Faculties</h1>
 
+<%= form_tag(faculties_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Faculty" %>
+<%= submit_tag "Search" %>
+<% end %>
+<% if @faculties.empty? %>
+  <p>There are no permits containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
 <table>
   <thead>
     <tr>
+      <th>AU ID</th>
       <th>Last name</th>
       <th>First name</th>
-      <th>Home address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th>Home phone</th>
       <th>Cell phone</th>
       <th>Office phone</th>
-      <th>New faculty</th>
       <th>Department</th>
       <th>Office</th>
       <th colspan="3"></th>
@@ -23,19 +26,14 @@
   <tbody>
     <% @faculties.each do |faculty| %>
       <tr>
+        <td><%= faculty.faculty_id %></td>
         <td><%= faculty.last_name %></td>
         <td><%= faculty.first_name %></td>
-        <td><%= faculty.home_address %></td>
-        <td><%= faculty.city %></td>
-        <td><%= faculty.state %></td>
-        <td><%= faculty.zip %></td>
-        <td><%= faculty.home_phone %></td>
         <td><%= faculty.cell_phone %></td>
         <td><%= faculty.office_phone %></td>
-        <td><%= faculty.new_faculty %></td>
         <td><%= faculty.department %></td>
         <td><%= faculty.office %></td>
-        <td><%= link_to 'Show', faculty if policy(faculty).show? %></td>
+        <td><%= link_to 'Show', faculty if policy(faculty).show? || policy(faculty).edit? %></td>
         <td><%= link_to 'Edit', edit_faculty_path(faculty) if policy(faculty).edit? %></td>
         <td><%= link_to 'Destroy', faculty, method: :delete, data: { confirm: 'Are you sure?' } if policy(faculty).destroy? %></td>
       </tr>

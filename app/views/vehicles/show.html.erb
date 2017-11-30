@@ -36,18 +36,22 @@
 
 <p>
   <strong>Permits permit number:</strong>
-  <%= @vehicle.permit_id %>
+  <%= @vehicle.vehicle_permit_id %>
 </p>
 
-<p>
-  <strong>Faculty auid:</strong>
-  <%= @vehicle.faculty_id %>
-</p>
+<% if @vehicle.faculty_id.present? %>
+  <p>
+    <strong>Faculty AUID:</strong>
+    <%= link_to @vehicle.faculty.first_name + " " + @vehicle.faculty.last_name, faculty_path(@vehicle.faculty_id) %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Students auid:</strong>
-  <%= @vehicle.student_id %>
-</p>
+<% if @vehicle.student_id.present? %>
+  <p>
+    <strong>Students AUID:</strong>
+    <%= link_to @vehicle.student.first_name + " " + @vehicle.student.last_name, student_path(@vehicle.student_id) %>
+  </p>
+<% end %>
 
-<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<%= link_to 'Edit | ', edit_vehicle_path(@vehicle) if policy(@vehicle).edit? %> 
 <%= link_to 'Back', vehicles_path %>

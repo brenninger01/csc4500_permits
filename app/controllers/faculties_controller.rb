@@ -6,7 +6,7 @@ class FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    if current_user.roles == 'admin' #checks if user is admin, if so displays all of the faculty in database.
+    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the faculty in database.
       @faculties = Faculty.all
     elsif user_signed_in?
       @faculties = Faculty.all.where(:user_id => current_user.id) #Only displays the the users faculty.
@@ -19,6 +19,8 @@ class FacultiesController < ApplicationController
   # GET /faculties/1
   # GET /faculties/1.json
   def show
+    @faculties = Faculty.find(params[:id])
+    @vehicles = @faculties.vehicles
   end
 
   # GET /faculties/new

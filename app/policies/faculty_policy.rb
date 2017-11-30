@@ -1,14 +1,26 @@
 class FacultyPolicy < ApplicationPolicy
 	def index?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.faculty?
 	end
 
 	def new?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.faculty?
 	end
 
 	def create?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.faculty?
+	end
+
+	def show?
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user == record.user
 	end
 
 	def admin_show?
@@ -16,11 +28,11 @@ class FacultyPolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		user.present? && user.admin?
+		false
 	end
 
 	def edit?
-		return true if user.present? && user.admin?
+		#return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
 		user.present? && user == record.user
 	end

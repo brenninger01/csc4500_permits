@@ -12,68 +12,70 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :ID %>
-    <%= form.text_field :student_id, id: :student_student_id %>
+    <% unless @student.persisted? %>
+      <%= form.label :ID %>
+      <%= form.text_field :student_id, id: :student_student_id , :required => 'required', placeholder: "Required" %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, id: :student_last_name %>
+    <%= form.text_field :last_name, id: :student_last_name, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, id: :student_first_name %>
+    <%= form.text_field :first_name, id: :student_first_name, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_address %>
-    <%= form.text_field :home_address, id: :student_home_address %>
+    <%= form.text_field :home_address, id: :student_home_address, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_city %>
-    <%= form.text_field :home_city, id: :student_home_city %>
+    <%= form.text_field :home_city, id: :student_home_city, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_state %>
-    <%= form.text_field :home_state, id: :student_home_state %>
+    <%= form.text_field :home_state, id: :student_home_state, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_zip %>
-    <%= form.text_field :home_zip, id: :student_home_zip %>
+    <%= form.text_field :home_zip, id: :student_home_zip, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :school_year_address %>
-    <%= form.text_field :school_year_address, id: :student_school_year_address %>
+    <%= form.text_field :school_year_address, id: :student_school_year_address, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :school_year_city %>
-    <%= form.text_field :school_year_city, id: :student_school_year_city %>
+    <%= form.text_field :school_year_city, id: :student_school_year_city, :required => 'Required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :school_year_zip %>
-    <%= form.text_field :school_year_zip, id: :student_school_year_zip %>
+    <%= form.text_field :school_year_zip, id: :student_school_year_zip, :required => 'Required',placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :room_number %>
-    <%= form.text_field :room_number, id: :student_room_number %>
+    <%= form.text_field :room_number, id: :student_room_number, placeholder: "Optional" %>
   </div>
 
   <div class="field">
     <%= form.label :home_phone %>
-    <%= form.text_field :home_phone, id: :student_home_phone %>
+    <%= form.text_field :home_phone, id: :student_home_phone, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :cell_phone %>
-    <%= form.text_field :cell_phone, id: :student_cell_phone %>
+    <%= form.text_field :cell_phone, id: :student_cell_phone, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
@@ -88,7 +90,7 @@
 
   <div class="field">
     <%= form.label :athletic_team %>
-    <%= form.text_field :athletic_team, id: :student_athletic_team %>
+    <%= form.text_field :athletic_team, id: :student_athletic_team, placeholder: "Optional" %>
   </div>
 
   <div class="actions">

@@ -12,68 +12,70 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :ID %>
-    <%= form.text_field :faculty_id, id: :faculty_faculty_id %>
+    <% unless @faculty.persisted? %>
+      <%= form.label :ID %>
+      <%= form.text_field :faculty_id, id: :faculty_faculty_id, :required => 'required', placeholder: "Required" %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, id: :faculty_last_name %>
+    <%= form.text_field :last_name, id: :faculty_last_name, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, id: :faculty_first_name %>
+    <%= form.text_field :first_name, id: :faculty_first_name, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_address %>
-    <%= form.text_field :home_address, id: :faculty_home_address %>
+    <%= form.text_field :home_address, id: :faculty_home_address, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :city %>
-    <%= form.text_field :city, id: :faculty_city %>
+    <%= form.text_field :city, id: :faculty_city, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state, id: :faculty_state %>
+    <%= form.text_field :state, id: :faculty_state, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :zip %>
-    <%= form.text_field :zip, id: :faculty_zip %>
+    <%= form.text_field :zip, id: :faculty_zip, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :home_phone %>
-    <%= form.text_field :home_phone, id: :faculty_home_phone %>
+    <%= form.text_field :home_phone, id: :faculty_home_phone, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :cell_phone %>
-    <%= form.text_field :cell_phone, id: :faculty_cell_phone %>
+    <%= form.text_field :cell_phone, id: :faculty_cell_phone, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :office_phone %>
-    <%= form.text_field :office_phone, id: :faculty_office_phone %>
+    <%= form.text_field :office_phone, id: :faculty_office_phone, placeholder: "Optional" %> 
   </div>
 
   <div class="field">
     <%= form.label :new_faculty %>
-    <%= form.check_box :new_faculty, id: :faculty_new_faculty %>
+    <%= form.check_box :new_faculty, id: :faculty_new_faculty, placeholder: "Optional" %>
   </div>
 
   <div class="field">
     <%= form.label :department %>
-    <%= form.text_field :department, id: :faculty_department %>
+    <%= form.text_field :department, id: :faculty_department, :required => 'required', placeholder: "Required" %>
   </div>
 
   <div class="field">
     <%= form.label :office %>
-    <%= form.text_field :office, id: :faculty_office %>
+    <%= form.text_field :office, id: :faculty_office, placeholder: "Optional" %>
   </div>
 
   <div class="actions">

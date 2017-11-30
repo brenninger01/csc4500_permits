@@ -290,4 +290,21 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+
+  # Permit utf8, authenticity_token and commit params submitted to controllers
+  # See: https://github.com/activeadmin/activeadmin/issues/2595
+  module ActiveAdmin
+    class ResourceDSL < DSL
+      def permit_params(*args, &block)
+        resource_sym = config.resource_name.singular.to_sym
+        controller do
+          define_method :permitted_params do
+            params.permit :utf8, :authenticity_token, :commit,
+                          resource_sym =>
+                          block ? instance_exec(&block) : args
+          end
+        end
+      end
+    end
+  end
 end

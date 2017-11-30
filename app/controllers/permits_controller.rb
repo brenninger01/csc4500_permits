@@ -1,17 +1,18 @@
-class PermitsController < ApplicationController
-  before_action :set_permit, only: [:show, :edit, :update, :destroy]
+class VehiclePermitsController < ApplicationController
+  before_action :set_vehiclepermit, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   after_action :verify_authorized
 
   # GET /permits
   # GET /permits.json
   def index
-     if user_signed_in?
-      @permits = Permit.all.where(:user_id => current_user.id)
-    else
-      @permits = Permit.all
-    end
-    authorize @permits
+      @vehiclepermits = VehiclePermit.all
+      if params[:search]
+        @vehiclepermits = VehiclePermit.search(params[:search]).order("created_at DESC")
+      else
+        @vehiclepermits = VehiclePermit.all.order('created_at DESC')
+      end
+    authorize @vehiclepermits
   end
 
   # GET /permits/1
@@ -21,27 +22,40 @@ class PermitsController < ApplicationController
 
   # GET /permits/new
   def new
-    @permit = Permit.new
-    authorize @permit
+    @vehiclepermit = VehiclePermit.new
+    @vehicle = @vehiclepermit.build_vehicle
+    @vehicle = Vehicle.all
+    authorize @vehiclepermit
   end
 
   # GET /permits/1/edit
   def edit
+    @vehicle = @vehiclepermit.build_vehicle
   end
 
   # POST /permits
   # POST /permits.json
   def create
-    @permit = current_user.build_permit(permit_params)
+
+    vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
+    if current_user.faculty?
+      @vehiclepermit = current_user.vehiclepermit.build(permit_params.merge(date_entered: Date.today, 
+        entered_by: current_user.faculty.first_name + " " + current_user.faculty.last_name))
+      @vehiclepermit.update(vehicle: vehicle)
+    elsif current_user.student?
+      @vehiclepermit = current_user.vehiclepermit.build(permit_params.merge(date_entered: Date.today,
+       entered_by: current_user.student.first_name + " " + current_user.student.last_name))
+      @vehiclepermit.update(vehicle: vehicle)
+    end
     authorize @permit
 
     respond_to do |format|
-      if @permit.save
-        format.html { redirect_to @permit, notice: 'Permit was successfully created.' }
-        format.json { render :show, status: :created, location: @permit }
+      if @vehiclepermit.save
+        format.html { redirect_to @vehiclepermit, notice: 'Permit was successfully created.' }
+        format.json { render :show, status: :created, location: @vehiclepermit }
       else
         format.html { render :new }
-        format.json { render json: @permit.errors, status: :unprocessable_entity }
+        format.json { render json: @vehiclepermit.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,13 +63,16 @@ class PermitsController < ApplicationController
   # PATCH/PUT /permits/1
   # PATCH/PUT /permits/1.json
   def update
+    vehicle = Vehicle.find_by(license_number: permit_params[:vehicle_attributes][:license_number])
+    
     respond_to do |format|
-      if @permit.update(permit_params)
-        format.html { redirect_to @permit, notice: 'Permit was successfully updated.' }
-        format.json { render :show, status: :ok, location: @permit }
+      if @vehiclepermit.update(permit_params)
+        @vehiclepermit.update(vehicle: vehicle)
+        format.html { redirect_to @vehiclepermit, notice: 'Permit was successfully updated.' }
+        format.json { render :show, status: :ok, location: @vehiclepermit }
       else
         format.html { render :edit }
-        format.json { render json: @permit.errors, status: :unprocessable_entity }
+        format.json { render json: @vehiclepermit.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,7 +80,7 @@ class PermitsController < ApplicationController
   # DELETE /permits/1
   # DELETE /permits/1.json
   def destroy
-    @permit.destroy
+    @vehiclepermit.destroy
     respond_to do |format|
       format.html { redirect_to permits_url, notice: 'Permit was successfully destroyed.' }
       format.json { head :no_content }
@@ -73,12 +90,12 @@ class PermitsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_permit
-      @permit = Permit.find(params[:id])
-      authorize @permit
+      @vehiclepermit = Permit.find(params[:id])
+      authorize @vehiclepermit
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def permit_params
-      params.require(:permit).permit(:date_issued, :issued_by, :date_entered, :entered_by)
+      params.require(:vehiclepermit).permit(:permit_id, :date_issued, :issued_by, :date_entered, :entered_by, vehicle_attributes: [:license_number])
     end
 end

@@ -1,0 +1,46 @@
+<script>
+  $(document).ready(function() {
+    $('#vehicle_permit_vehicle_attributes_license_number').select2();
+  });
+
+</script>
+
+<%= form_with(model: vehicle_permit, local: true) do |form| %>
+  <% if vehicle_permit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vehicle_permit.errors.count, "error") %> prohibited this permit from being saved:</h2>
+
+      <ul>
+      <% vehicle_permit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.fields_for :vehicle do |f| %>
+      <%= f.label :license_number %>
+      <%= f.collection_select( :license_number, Vehicle.order(:license_number), :license_number, :license_number) %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vehicle_permit_id %>
+    <%= form.text_field :permit_id, id: :permit_vehicle_permit_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_issued %>
+    <%= form.date_field :date_issued, id: :permit_date_issued %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issued_by %>
+    <%= form.text_field :issued_by, id: :permit_issued_by %>
+  </div> 
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

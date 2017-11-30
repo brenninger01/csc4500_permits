@@ -1,5 +1,15 @@
 <h1>Vehicles</h1>
 
+<% if current_user.admin? || current_user.editor? %>
+  <%= form_tag(vehicles_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Vehicles" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  <% if @vehicles.empty? %>
+    <p>There are no vehicles containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -8,12 +18,13 @@
       <th>Make</th>
       <th>Model</th>
       <th>License number</th>
-      <th>State licensed</th>
-      <th>Experation year</th>
       <th>Permits permit number</th>
+      <% if current_user.faculty? || (current_user.admin? || current_user.editor?)%>
       <th>Faculty auid</th>
+      <% end %>
+      <%if current_user.student? || (current_user.admin? || current_user.editor?)%>
       <th>Students auid</th>
-      <th>Vehicle User ID </th>
+      <% end %> 
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,12 +37,13 @@
         <td><%= vehicle.make %></td>
         <td><%= vehicle.model %></td>
         <td><%= vehicle.license_number %></td>
-        <td><%= vehicle.state_licensed %></td>
-        <td><%= vehicle.experation_year %></td>
-        <td><%= vehicle.permit_id %></td>
-        <td><%= vehicle.faculty_id %></td>
-        <td><%= vehicle.student_id %></td>
-        <td><%= vehicle.user_id %></td>
+        <td><%= vehicle.vehicle_permit_id %></td> 
+        <% if current_user.faculty? || (current_user.admin? || current_user.editor?) %>
+          <td><%= vehicle.faculty_id %></td>
+        <% end %>
+        <% if current_user.student? || (current_user.admin? || current_user.editor?) %>
+          <td><%= vehicle.student_id %></td>
+        <% end %>
         <td><%= link_to 'Show', vehicle if policy(vehicle).show? %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) if policy(vehicle).edit? %></td>
         <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } if policy(vehicle).destroy? %></td>
@@ -43,5 +55,5 @@
 <br>
 
 <% if policy(Vehicle).new? %>
-<%= link_to 'New Vehicle', new_vehicle_path %>
+<%= link_to 'New Vehicle', new_vehicle_path if (current_user.vehicles.empty? || current_user.faculty? || (current_user.admin? || current_user.editor?)) %>
 <% end %>

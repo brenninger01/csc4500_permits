@@ -64,6 +64,11 @@
 </p>
 
 <p>
+  <strong>Emergency Contact:</strong>
+  <%= link_to @student.emergency_contact.first_name + " " + @student.emergency_contact.last_name, emergency_contact_path(@student.emergency_contact.contact_id) if @student.emergency_contact.present? %>
+</p>
+
+<p>
   <strong>New student:</strong>
   <%= @student.new_student %>
 </p>
@@ -76,6 +81,13 @@
 <p>
   <strong>Athletic team:</strong>
   <%= @student.athletic_team %>
+</p>
+
+<p>
+  <strong>Vehicle: </strong>
+  <% if @student.vehicle.present? %>
+    <%= link_to @student.vehicle.license_number , vehicle_path(@student.vehicle.vehicle_id) %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |

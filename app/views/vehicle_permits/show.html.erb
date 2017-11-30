@@ -1,0 +1,27 @@
+<p>
+  <strong>Permit ID:</strong>
+  <%= @vehicle_permit.vehicle_permit_id %>
+</p>
+
+<p>
+  <strong>Date issued:</strong>
+  <%= @vehicle_permit.date_issued %>
+</p>
+
+<p>
+  <strong>Issued by:</strong>
+  <%= @vehicle_permit.issued_by %>
+</p>
+
+<p>
+  <strong>Date entered:</strong>
+  <%= @vehicle_permit.date_entered %>
+</p>
+
+<p>
+  <strong>Entered by:</strong>
+  <%= @vehicle_permit.entered_by %>
+</p>
+
+<%= link_to 'Edit', edit_vehicle_permit_path(@vehicle_permit) %> |
+<%= link_to 'Back', vehicle_permits_path %>

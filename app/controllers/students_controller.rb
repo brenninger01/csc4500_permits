@@ -1,28 +1,31 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  after_action :verify_authorized
 
   # GET /students
   # GET /students.json
   def index
-    if current_user.roles == 'admin' #checks if user is admin, if so displays all of the students in database.
+    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the students in database.
       @students = Student.all
     elsif user_signed_in?
       @students = Student.all.where(:user_id => current_user.id) #Only displays the the users student. 
     else
       @students = Student.all
     end
+    authorize @students
   end
 
   # GET /students/1
   # GET /students/1.json
   def show
-
+    
   end
 
   # GET /students/new
   def new
     @student = Student.new
+    authorize @student
   end
 
   # GET /students/1/edit
@@ -33,6 +36,7 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = current_user.build_student(student_params) #When createing the student, it connects the current logged in user to the student in the database. 
+    authorize @student
 
     respond_to do |format|
       if @student.save
@@ -73,6 +77,7 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+      authorize @student
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

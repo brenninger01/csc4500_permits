@@ -1,14 +1,20 @@
 class StudentPolicy < ApplicationPolicy
 	def index?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.student?
 	end
 
 	def new?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.student?
 	end
 
 	def create?
-		true
+		return true if (user.present? && user.admin?) || (user.present? && user.editor?)
+
+		user.present? && user.student?
 	end
 
 	def admin_show?
@@ -16,11 +22,11 @@ class StudentPolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		user.present? && user.admin?
+		false
 	end
 
 	def edit?
-		return true if user.present? && user.admin?
+		#return true if (user.present? && user.admin?) || (user.present? && user.editor?)
 
 		user.present? && user == record.user
 	end

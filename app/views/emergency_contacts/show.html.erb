@@ -44,15 +44,21 @@
   <%= @emergency_contact.office_phone %>
 </p>
 
-<p>
-  <strong>Faculty auid:</strong>
-  <%= @emergency_contact.faculty_id %>
-</p>
+<% if @emergency_contact.faculty.present? %>
+  <p>
+    <strong>Faculty auid:</strong>
+    <%= link_to @emergency_contact.faculty.first_name + " " + @emergency_contact.faculty.last_name,
+        faculty_path(@emergency_contact.faculty.faculty_id) %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Students auid:</strong>
-  <%= @emergency_contact.student_id %>
-</p>
+<% if @emergency_contact.student.present? %>
+  <p>
+    <strong>Students auid:</strong>
+    <%= link_to @emergency_contact.student.first_name + " " + @emergency_contact.student.last_name,
+      student_path(@emergency_contact.student.student_id) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_emergency_contact_path(@emergency_contact) %> |
 <%= link_to 'Back', emergency_contacts_path %>
