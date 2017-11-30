@@ -11,9 +11,9 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-	before_action :set_vehicle_permit, only: [:show, :edit, :update, :destroy]
 	filter :permit_id
-	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
+	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by,
+		vehicle_attributes: [:license_number, :vehicle_permit_id]
 
 	index do #defines what the index page displays
 		selectable_column
@@ -41,7 +41,9 @@
 
 	form do |f|
   		f.inputs do
-  			f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			f.has_many :vehicle, new_record: false do |veh|
+  				veh.input :license_number, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			end
   			f.input :vehicle_permit_id
   			f.input :date_issued, as: :date_picker
   			f.input :issued_by
@@ -53,23 +55,23 @@
 		def new
 			@vehicle_permit = VehiclePermit.new
     		@vehicle = @vehicle_permit.build_vehicle 
+    		@vehicle = Vehicle.all
     	end	
 
     	def create
-    		 vehicle = Vehicle.find_by(vehicle_permit_params[:vehicle])
-    		 @vehicle = current_user.vehicle_permit.build(permitted_params.merge(date_entered: Date.today, 
-        		entered_by: current_admin_user.email)[:vehicle_permit])
+
+    		vehicle = Vehicle.find_by(vehicle_permit_params[:vehicle_attributes][:license_number])
+    		 #@vehicle_permit = current_user.vehicle_permit.build(vehicle_permit_params.merge(date_entered: Date.today, entered_by: current_admin_user.email)[:vehicle_permit])
     		 @vehicle_permit.update(vehicle: vehicle)
     		 super
     	end
 
     	def update
-
 			super    		
     	end
 
     	def vehicle_permit_params
-    		params.require(:vehicle_permit).permit(:vehicle_permit_id, :date_issued, :issued_by, :date_entered, :entered_by, :utf8, vehicle_attributes: [:license_number])
+    		params.permit vehicle_permit: [:vehicle_permit_id, :date_issued, :issued_by, :date_entered, :entered_by,  vehicle_attributes: [:license_number]]
     	end
 
     	def set_vehicle_permit
