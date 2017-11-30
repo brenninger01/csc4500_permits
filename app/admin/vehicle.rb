@@ -47,7 +47,7 @@ ActiveAdmin.register Vehicle do
         row "Expiration year" do |vehicle|
           vehicle.experation_year
         end
-        row :permit
+        row :vehicle_permit
         row :student do |vehicle|
           if vehicle.student.present?
             link_to vehicle.student.first_name + " " + vehicle.student.last_name,

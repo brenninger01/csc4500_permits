@@ -5,29 +5,29 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :vehicles
-  has_many :permit
+  has_many :vehicle_permit
   has_one :faculty
   has_one :emergency_contact
   has_one :student
 
   def admin?
-  	roles == "admin"
+  	roles.upcase == "ADMIN"
   end
 
   def editor?
-  	roles == "editor"
+  	roles.upcase == "EDITOR"
   end
 
   def standard?
-  	roles == "standard"
+  	roles.upcase == "STANDARD"
   end
 
   def student?
-    position == "Student"
+    position.upcase == "STUDENT"
   end
 
   def faculty?
-    position == "Faculty"
+    position.upcase == "FACULTY"
   end
 
 end
