@@ -1,7 +1,7 @@
-class CreatePermits < ActiveRecord::Migration[5.1]
+class CreateVehiclePermits < ActiveRecord::Migration[5.1]
   def change
-    create_table :permits, id: false do |t|
-      t.string :permit_id, primary_key: true
+    create_table :vehicle_permits, id: false do |t|
+      t.string :vehicle_permit_id, primary_key: true
       t.datetime :date_issued, :null => false
       t.string :issued_by, :null => false
       t.date :date_entered, :null => false

@@ -11,9 +11,15 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+<<<<<<< HEAD
 	filter :permit_id
 	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by,
 		vehicle_attributes: [:license_number, :vehicle_permit_id]
+=======
+	before_action :set_vehicle_permit, only: [:show, :edit, :update, :destroy]
+	filter :vehicle_permit_id
+	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
+>>>>>>> develop
 
 	index do #defines what the index page displays
 		selectable_column
@@ -54,6 +60,7 @@
 	controller do
 		def new
 			@vehicle_permit = VehiclePermit.new
+
     		@vehicle = @vehicle_permit.build_vehicle 
     		@vehicle = Vehicle.all
     	end	
