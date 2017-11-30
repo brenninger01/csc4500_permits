@@ -1,62 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
-
-  body {
-    margin: 0;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.right {
-    float: right;
-    width: 300px;
-}
-.left{
-  position: relative;
-  margin-top: -320px;
-  height: 20;
-  float: left;
-  width 300px;
-}
-</style>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Home Screen</title>
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/HomeScreenSheet.css">
 </head>
+<style media="screen">
+  body{
+    margin: 5px;
+    background-color: #314455;
+  }
+</style>
 <body>
+  <div class="white">
   <h1>Welcome to Campus Saftey Permits</h1>
-  <h2><%= current_user.student.first_name + " " + current_user.student.last_name%></h2>
+  <h2>
+    <%begin %>
+    <%= current_user.student.first_name + " " + current_user.student.last_name%>
+      <%rescue StandardError => e %>
+      <%begin %>
+      <%= current_user.faculty.first_name + " " + current_user.faculty.last_name%>
+        <%rescue StandardError => e %>
+        Please Register as a student or a faculty member!
+      <%end %>
+    <%end %>
+  </h2>
+  </div>
+  <div id = "right" class="container">
+    <div class="well">
+                      <ul class="nav" >
+                          <li class="nav-header" style = "font-size: 24px;"> Vehicle </li>
+                          <hr>
+                          <li style = "font-size: 18px;">  Registered Vehcile: </li>
+                          <li>
+                            <%begin %>
+                              <%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%>
+                              <%rescue StandardError => e %>
+                            <%end %> </li>
+                          <hr>
+                          <li class="nav-header" style = "font-size: 24px;">Emergency Contact</li>
+                          <hr>
+                          <li>Primary Contact:<br> Contact Goes Here</li>
+                      </ul>
+                          </div>
+  </div>
 
-<div class="right">
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+<div id = "left" class="container">
                 <div class="well">
-                    <ul class="nav" >
-                        <li class="nav-header" style = "font-size: 24px;">Vehicle</li>
-                        <hr>
-                        <li style = "font-size: 18px;">  Registered Vehcile: <br /><%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%></li>
-                        <hr>
-                        <li class="nav-header" style = "font-size: 24px;">Emergency Contact</li>
-                        <hr>
-                        <li>Primary Contact:<br> Contact Goes Here</li>
-                    </ul>
-                </div>
-        </div>
-    </div>
-</div>
-</div>
-<img style = "float: right; margin-right: 150px;"src="assets/tenor.gif" width="580">
-
-<div class="left">
-<div class="container">
-    <div class="row">
-        <!--/span-->
-        <div class="col-md-3">
-            <div class = "left">
-                <div class="well">
+                  <ul class = "nav">
                       In the event of an emergency, immediate notification to the Department of Campus Safety is essential to ensure the timely response of emergency personnel.
                       <br> <br>
                       <b>For Emergencies please dial: </b> 911 <br> 630-844-5450 <br> x555 (Campus Phone)<br> <br>
@@ -67,16 +57,13 @@
                         <b>Emergency Alerts:</b> <br>
                         <i>Consistent Text Messaging</i> <br> <br>
                         Official AU alert messages are always delivered from the same contact number. <br>Please take a moment to add 67283 and 226787 to your contacts as "AU Emergency Notifications".
-                <!--/.well -->
-            </div>
-            <!--/sidebar-nav-fixed -->
+                    </ul>
+                </div>
         </div>
-        <!--/span-->
-    </div>
-    <!--/row-->
-</div>
-</div>
 
-<img align="left" style = "margin-top: 70px;" src="assets/safest-colleges-badge.png" width="600">
+  <img id="middle"src="/assets/tenor.gif" alt="">
+
+  <img id="bottomRight" src="/assets/safestColleges.png" alt="">
+
 </body>
 </html>
