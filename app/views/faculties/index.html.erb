@@ -1,9 +1,18 @@
 
 <h1>Faculties</h1>
 
+<%= form_tag(faculties_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Faculty" %>
+<%= submit_tag "Search" %>
+<% end %>
+<% if @faculties.empty? %>
+  <p>There are no permits containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
 <table>
   <thead>
     <tr>
+      <th>AU ID</th>
       <th>Last name</th>
       <th>First name</th>
       <th>Cell phone</th>
@@ -17,6 +26,7 @@
   <tbody>
     <% @faculties.each do |faculty| %>
       <tr>
+        <td><%= faculty.faculty_id %></td>
         <td><%= faculty.last_name %></td>
         <td><%= faculty.first_name %></td>
         <td><%= faculty.cell_phone %></td>

@@ -1,4 +1,4 @@
-class PermitPolicy < ApplicationPolicy
+class VehiclePermitPolicy < ApplicationPolicy
 	def index?
 		return true if user.admin? || user.editor?
 	end

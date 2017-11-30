@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108173321) do
+ActiveRecord::Schema.define(version: 20171128113915) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -82,17 +82,6 @@ ActiveRecord::Schema.define(version: 20171108173321) do
     t.index ["user_id"], name: "fk_rails_f800e93b93"
   end
 
-  create_table "permits", primary_key: "permit_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "date_issued"
-    t.string "issued_by"
-    t.date "date_entered"
-    t.string "entered_by"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "fk_rails_0ad440fbba"
-  end
-
   create_table "students", primary_key: "student_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "last_name"
     t.string "first_name"
@@ -134,6 +123,17 @@ ActiveRecord::Schema.define(version: 20171108173321) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vehicle_permits", primary_key: "vehicle_permit_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "date_issued"
+    t.string "issued_by"
+    t.date "date_entered"
+    t.string "entered_by"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_0ad440fbba"
+  end
+
   create_table "vehicles", primary_key: "vehicle_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "year"
     t.string "color"
@@ -142,26 +142,26 @@ ActiveRecord::Schema.define(version: 20171108173321) do
     t.string "license_number"
     t.string "state_licensed"
     t.string "experation_year"
-    t.string "permit_id"
+    t.string "vehicle_permit_id"
     t.string "student_id"
     t.string "faculty_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["faculty_id"], name: "fk_rails_e75e1508bb"
-    t.index ["permit_id"], name: "fk_rails_2585d9a3da"
     t.index ["student_id"], name: "fk_rails_8d7731d871"
     t.index ["user_id"], name: "fk_rails_9e34682d54"
+    t.index ["vehicle_permit_id"], name: "fk_rails_2585d9a3da"
   end
 
   add_foreign_key "emergency_contacts", "faculties", primary_key: "faculty_id"
   add_foreign_key "emergency_contacts", "students", primary_key: "student_id"
   add_foreign_key "emergency_contacts", "users"
   add_foreign_key "faculties", "users"
-  add_foreign_key "permits", "users"
   add_foreign_key "students", "users"
+  add_foreign_key "vehicle_permits", "users"
   add_foreign_key "vehicles", "faculties", primary_key: "faculty_id"
-  add_foreign_key "vehicles", "permits", primary_key: "permit_id"
   add_foreign_key "vehicles", "students", primary_key: "student_id"
   add_foreign_key "vehicles", "users"
+  add_foreign_key "vehicles", "vehicle_permits", primary_key: "vehicle_permit_id"
 end

@@ -1,17 +1,17 @@
 <script>
   $(document).ready(function() {
-    $('#permit_vehicle_attributes_license_number').select2();
+    $('#vehicle_permit_vehicle_attributes_license_number').select2();
   });
 
 </script>
 
-<%= form_with(model: permit, local: true) do |form| %>
-  <% if permit.errors.any? %>
+<%= form_with(model: vehicle_permit, local: true) do |form| %>
+  <% if vehicle_permit.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(permit.errors.count, "error") %> prohibited this permit from being saved:</h2>
+      <h2><%= pluralize(vehicle_permit.errors.count, "error") %> prohibited this permit from being saved:</h2>
 
       <ul>
-      <% permit.errors.full_messages.each do |message| %>
+      <% vehicle_permit.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -26,8 +26,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :permit_id %>
-    <%= form.text_field :permit_id, id: :permit_permit_id %>
+    <%= form.label :vehicle_permit_id %>
+    <%= form.text_field :permit_id, id: :permit_vehicle_permit_id %>
   </div>
 
   <div class="field">

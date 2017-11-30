@@ -37,7 +37,7 @@
         <td><%= vehicle.make %></td>
         <td><%= vehicle.model %></td>
         <td><%= vehicle.license_number %></td>
-        <td><%= vehicle.permit_id %></td> 
+        <td><%= vehicle.vehicle_permit_id %></td> 
         <% if current_user.faculty? || (current_user.admin? || current_user.editor?) %>
           <td><%= vehicle.faculty_id %></td>
         <% end %>
