@@ -12,7 +12,7 @@
 #   permitted
 # end
 	before_action :set_vehicle_permit, only: [:show, :edit, :update, :destroy]
-	filter :permit_id
+	filter :vehicle_permit_id
 	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
 
 	index do #defines what the index page displays
@@ -52,6 +52,7 @@
 	controller do
 		def new
 			@vehicle_permit = VehiclePermit.new
+
     		@vehicle = @vehicle_permit.build_vehicle 
     	end	
 

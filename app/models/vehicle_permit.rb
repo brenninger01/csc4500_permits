@@ -5,6 +5,6 @@ class VehiclePermit < ApplicationRecord
 	accepts_nested_attributes_for :vehicle
 
 	def self.search(search)
-		where("permit_id LIKE ? OR issued_by LIKE ? OR entered_by LIKE ?", "%#{search}%", "%#{search}", "%#{search}%")
+		where("vehicle_permit_id LIKE ? OR issued_by LIKE ? OR entered_by LIKE ?", "%#{search}%", "%#{search}", "%#{search}%")
 	end
 end
