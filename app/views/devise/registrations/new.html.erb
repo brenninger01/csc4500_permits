@@ -28,6 +28,14 @@
       <% end %><br />
       <%= f.password_field :password, autocomplete: "off" %>
     </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :position %> <br />
+    <%= f.select(:position, ['Student', 'Faculty']) %>
+  </div>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
