@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20171108173321) do
   end
 
   create_table "emergency_contacts", primary_key: "contact_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "address", null: false
-    t.string "city", null: false
-    t.string "state", null: false
-    t.string "zip", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.string "home_phone"
     t.string "cell_phone"
     t.string "office_phone"
@@ -64,34 +64,45 @@ ActiveRecord::Schema.define(version: 20171108173321) do
   end
 
   create_table "faculties", primary_key: "faculty_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "home_address", null: false
-    t.string "city", null: false
-    t.string "state", null: false
-    t.string "zip", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "home_address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
     t.string "home_phone"
     t.string "cell_phone"
     t.string "office_phone"
     t.boolean "new_faculty"
-    t.string "department", null: false
-    t.string "office", null: false
+    t.string "department"
+    t.string "office"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_f800e93b93"
   end
 
+  create_table "permits", primary_key: "permit_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "date_issued"
+    t.string "issued_by"
+    t.date "date_entered"
+    t.string "entered_by"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fk_rails_0ad440fbba"
+  end
+
   create_table "students", primary_key: "student_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "home_address", null: false
-    t.string "home_city", null: false
-    t.string "home_state", null: false
-    t.string "home_zip", null: false
-    t.string "school_year_address", null: false
-    t.string "school_year_city", null: false
-    t.string "school_year_zip", null: false
+    t.string "last_name"
+    t.string "first_name"
+    t.string "home_address"
+    t.string "home_city"
+    t.string "home_state"
+    t.string "home_zip"
+    t.string "school_year_address"
+    t.string "school_year_city"
+    t.string "school_year_zip"
     t.string "room_number"
     t.string "home_phone"
     t.string "cell_phone"
@@ -123,45 +134,34 @@ ActiveRecord::Schema.define(version: 20171108173321) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vehicle_permits", primary_key: "vehicle_permit_id", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "date_issued", null: false
-    t.string "issued_by", null: false
-    t.date "date_entered", null: false
-    t.string "entered_by", null: false
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "fk_rails_9e850af0b0"
-  end
-
   create_table "vehicles", primary_key: "vehicle_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "year", null: false
-    t.string "color", null: false
-    t.string "make", null: false
-    t.string "model", null: false
-    t.string "license_number", null: false
-    t.string "state_licensed", null: false
-    t.string "experation_year", null: false
-    t.string "vehicle_permit_id"
+    t.string "year"
+    t.string "color"
+    t.string "make"
+    t.string "model"
+    t.string "license_number"
+    t.string "state_licensed"
+    t.string "experation_year"
+    t.string "permit_id"
     t.string "student_id"
     t.string "faculty_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["faculty_id"], name: "fk_rails_e75e1508bb"
+    t.index ["permit_id"], name: "fk_rails_2585d9a3da"
     t.index ["student_id"], name: "fk_rails_8d7731d871"
     t.index ["user_id"], name: "fk_rails_9e34682d54"
-    t.index ["vehicle_permit_id"], name: "fk_rails_2c22d44ed0"
   end
 
   add_foreign_key "emergency_contacts", "faculties", primary_key: "faculty_id"
   add_foreign_key "emergency_contacts", "students", primary_key: "student_id"
   add_foreign_key "emergency_contacts", "users"
   add_foreign_key "faculties", "users"
+  add_foreign_key "permits", "users"
   add_foreign_key "students", "users"
-  add_foreign_key "vehicle_permits", "users"
   add_foreign_key "vehicles", "faculties", primary_key: "faculty_id"
+  add_foreign_key "vehicles", "permits", primary_key: "permit_id"
   add_foreign_key "vehicles", "students", primary_key: "student_id"
   add_foreign_key "vehicles", "users"
-  add_foreign_key "vehicles", "vehicle_permits", primary_key: "vehicle_permit_id"
 end
