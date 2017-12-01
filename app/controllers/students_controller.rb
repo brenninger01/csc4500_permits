@@ -13,6 +13,13 @@ class StudentsController < ApplicationController
     else
       @students = Student.all
     end
+
+    if params[:search]
+        @students = Student.search(params[:search]).order("created_at DESC")
+      else
+        @students = Student.all.order('created_at DESC')
+      end
+
     authorize @students
   end
 

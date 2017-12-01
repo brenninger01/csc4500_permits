@@ -1,5 +1,15 @@
 <h1>Students</h1>
 
+<% if current_user.admin? || current_user.editor? %>
+  <%= form_tag(students_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Students" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  <% if @students.empty? %>
+    <p>There are no Students containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
+<% end %>
+
 <table>
   <thead>
     <tr>

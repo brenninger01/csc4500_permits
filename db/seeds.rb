@@ -46,7 +46,7 @@ fac2 = Faculty.create(faculty_id: '3568971', last_name: 'Grosby', first_name: 'M
      zip: '60352', home_phone: '3316598241', cell_phone: '6302569874', office_phone: '6302354681', new_faculty: '1', department: 'Math', office: 'Dun 217',
      user_id: user7.id, created_at: '2017-01-01 10:00:02', updated_at: '2017-06-20 10:04:00')
 
-
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 puts "#{user1.id}"
 puts "Added #{User.count} users"

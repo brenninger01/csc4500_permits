@@ -13,6 +13,12 @@ class FacultiesController < ApplicationController
     else
       @faculties = Faculty.all
     end
+
+    if params[:search]
+        @faculties = Faculty.search(params[:search]).order("created_at DESC")
+      else
+        @faculties = Faculty.all.order('created_at DESC')
+      end
     authorize @faculties
   end
 
