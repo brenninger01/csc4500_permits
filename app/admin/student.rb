@@ -3,6 +3,12 @@ ActiveAdmin.register Student do
 	config.sort_order = 'student_id'
 
 	filter :email
+	filter :student_id
+	filter :last_name
+	filter :first_name
+	filter :athletic_team
+	filter :home_phone
+	filter :cell_phone
 	permit_params :student_id, :last_name, :first_name, :home_address, :home_city, :home_state,
 		:home_zip, :school_year_address, :school_year_city, :school_year_zip, :room_number,
 		:new_student, :returning_student, :athletic_team, :home_phone, :cell_phone

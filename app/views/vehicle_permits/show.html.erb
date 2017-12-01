@@ -22,6 +22,10 @@
   <strong>Entered by:</strong>
   <%= @vehicle_permit.entered_by %>
 </p>
+<p>
+  <strong>Vehicle:</strong>
+  <%= link_to @vehicle_permit.vehicle.license_number, vehicle_path(@vehicle_permit.vehicle.vehicle_id)%>
+</p>
 
 <%= link_to 'Edit', edit_vehicle_permit_path(@vehicle_permit) %> |
 <%= link_to 'Back', vehicle_permits_path %>
