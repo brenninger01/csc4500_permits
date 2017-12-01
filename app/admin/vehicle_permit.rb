@@ -11,9 +11,10 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-	before_action :set_vehicle_permit, only: [:show, :edit, :update, :destroy]
-	filter :vehicle_permit_id
-	permit_params :utf8, :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by
+	filter :permit_id
+	permit_params :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by,
+		vehicle_attributes: [:license_number]
+
 
 	index do #defines what the index page displays
 		selectable_column
@@ -40,8 +41,11 @@
 	end
 
 	form do |f|
+		license_collection = Vehicle.all.map{ |vehicle| [vehicle.license_number] }
   		f.inputs do
-  			f.input :vehicle, :collection => Vehicle.all.map{ |vehicle| [vehicle.license_number]}
+  			f.has_many :vehicle, new_record: false do |veh|
+  				veh.input :license_number, :collection => license_collection
+  			end
   			f.input :vehicle_permit_id
   			f.input :date_issued, as: :date_picker
   			f.input :issued_by
@@ -50,32 +54,32 @@
   	end
 
 	controller do
+		
 		def new
-			@vehicle_permit = VehiclePermit.new
-
-    		@vehicle = @vehicle_permit.build_vehicle 
-    	end	
+        	@vehicle_permit = VehiclePermit.new
+        	@vehicle = @vehicle_permit.build_vehicle 
+    	end 
 
     	def create
-    		 vehicle = Vehicle.find_by(vehicle_permit_params[:vehicle])
-    		 @vehicle = current_user.vehicle_permit.build(permitted_params.merge(date_entered: Date.today, 
-        		entered_by: current_admin_user.email)[:vehicle_permit])
+    		#puts params.inspect
+
+    		vehicle = Vehicle.find_by(license_number: permitted_params[:vehicle_permit])
+    		puts vehicle.inspect
+    		 #@vehicle_permit = current_user.vehicle_permit.build(vehicle_permit_params.merge(date_entered: Date.today, entered_by: current_admin_user.email)[:vehicle_permit])
+    		 #@vehicle_permit.update(vehicle: vehicle)
+    		 additional_params = {entered_by: current_admin_user.email, date_entered: Date.today}
+    		 @vehicle_permit = current_user.vehicle_permit.build(permitted_params[:vehicle_permit].merge(additional_params))
     		 @vehicle_permit.update(vehicle: vehicle)
     		 super
     	end
 
     	def update
-
 			super    		
     	end
 
     	def vehicle_permit_params
-    		params.require(:vehicle_permit).permit(:vehicle_permit_id, :date_issued, :issued_by, :date_entered, :entered_by, :utf8, vehicle_attributes: [:license_number])
+    		params.permit vehicle_permit: [:vehicle_permit_id, :date_issued, :issued_by, :date_entered, :entered_by,  vehicle_attributes: [:license_number]]
     	end
-
-    	def set_vehicle_permit
-      		@vehicle_permit = VehiclePermit.find(params[:id])
-      	end
     end
 
 end
