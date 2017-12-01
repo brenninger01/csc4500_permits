@@ -1,18 +1,41 @@
-<div class="center jumbotron">
-  <h1 class="h1jumbo">Welcome to Aurora University Campus Safety</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="/assets/stylesheets/welcomeSheet.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+  body{
+    background-color: #314455;
+  }
 
-  <h2 class="h2jumbo">
-    This is the home page for the
-    <a href="http://www.aurora.edu/">Aurora University</a>
-    Campus Safety Parking Permits
-  </h2>
-  <% if user_signed_in? #will only display the log in buttons if no one is logged in, other wise will not show up at all. %>
-  <% else %>
-    <%# for us signup_path does not work, so we used signup instead %>
-    <h2 class="h2jumbo">For first time users please sign up below. For returning users please sign in at the top right corner or click below. 
-    </h2>   
-    <%= link_to "Signup click here", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-    <%= link_to "Login click here", new_user_session_path, class: "btn btn-lg btn-primary" %>
-  <% end %>
-</div>
-</div>
+  </style>
+</head>
+<body>
+
+  <img id="auLogo" src="/assets/testLogo.png" alt="">
+  <img id="rightVine" src="/assets/rightSideVine.png" alt="">
+  <img id="leftVine" src="/assets/leftSideVine" alt="">
+  <div class="center jumbotron" id="test">
+    <h1 class="h1jumbo"> Aurora University Campus Safety Permits</h1>
+
+    <h2 class="h2jumbo" id="greyTint">
+      Aurora University Website:
+      <a style="color: white;" href="http://www.aurora.edu/">Aurora University</a>
+    </h2>
+
+
+    <% if user_signed_in? #will only display the log in buttons if no one is logged in, other wise will not show up at all. %>
+    <% else %>
+      <%# for us signup_path does not work, so we used signup instead %>
+
+      <h2 id="greyTint"class="h2jumbo">Unregistred Vehicle? Sign Up! &nbsp; Returning User? Sign In!</h2>
+      <%= link_to "Signup click here", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+      &nbsp;
+      <%= link_to "Login click here", new_user_session_path, class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</body>
+</html>
