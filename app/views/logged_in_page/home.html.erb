@@ -9,6 +9,17 @@
     margin: 5px;
     background-color: #314455;
   }
+  #link{
+    border-radius: 8px;
+    background-color:#48AA48;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+
+}
 </style>
 <body>
   <div class="white">
@@ -20,7 +31,12 @@
       <%begin %>
       <%= current_user.faculty.first_name + " " + current_user.faculty.last_name%>
         <%rescue StandardError => e %>
-        Please Register as a student or a faculty member!
+        Please Continue to Register:
+        <% if current_user.student? %>
+          <a id = "link" href="/students/new">Student Register Form</a>
+        <% else %>
+          <a id = "link" href="/faculties/new">Faculty Register Form</a>
+        <% end %>
       <%end %>
     <%end %>
   </h2>
@@ -35,11 +51,19 @@
                             <%begin %>
                               <%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%>
                               <%rescue StandardError => e %>
+                                Your vehicle is not registered.<br/>
+                                <a id = "link" href="/vehicles/new">Vehicle Registration Form</a>
                             <%end %> </li>
                           <hr>
-                          <li class="nav-header" style = "font-size: 24px;">Emergency Contact</li>
+                          <li class="nav-header" style = "font-size: 22px;">Emergency Contact</li>
                           <hr>
-                          <li>Primary Contact:<br> Contact Goes Here</li>
+                          <li>
+                            <%begin %>
+                              <%=current_user.emergency_contact.first_name + " " + current_user.emergency_contact.last_name + " " + current_user.emergency_contact.cell_phone%>
+                              <%rescue StandardError => e %>
+                                Your emergency contact is not registered.<br/>
+                                <a id = "link" href="/emergency_contacts/new">Emergency Contact Form</a>
+                            <%end %> </li>
                       </ul>
                           </div>
   </div>
