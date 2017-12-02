@@ -1,0 +1,38 @@
+#test{
+  background-color: #314455;
+  color: #48AA48;
+}
+
+#greyTint{
+  color: #97aabd;
+  font-size: 18px;
+}
+
+#auLogo{
+  width: 15%;
+  height: 15%;
+  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+#rightVine{
+width: 46%;
+height: 84%;
+position: absolute;
+right: 20px;
+top: 52px;
+}
+
+#leftVine{
+  width: 46%;
+  height: 84%;
+  position: absolute;
+  left: 20px;
+  top: 52px;
+}
+
+#someWhite{
+color: white;
+}
