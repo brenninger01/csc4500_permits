@@ -6,12 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #AdminUser.create!(email: 'superadmin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 User.create!(email: 'emailcrusher@email.com', password: 'passpass', created_at: '2015-02-3 10:54:35', updated_at: '2015-02-3 10:54:35')
 user1 = User.create!(email: 'newsmaker@email.com', password: 'slampass', created_at: '2015-04-3 12:54:35', updated_at: '2015-12-3 10:54:35')
-user2 = User.create!(email: 'studenthome@email.com', password: 'learner', created_at: '2016-05-25 10:00:35', updated_at: '2016-06-20 11:44:35', position: 'Student')
-user3 = User.create!(email: 'teacherwork@email.com', password: 'study6', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'Faculty')
-user4 = User.create!(email: 'superadmin@email.com', password: 'admin6', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'admin')
-user5 = User.create!(email: 'editmon@email.com', password: 'editor', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'editor')
+user2 = User.create!(email: 'studenthome@email.com', password: 'learner', created_at: '2016-05-25 10:00:35', updated_at: '2016-06-20 11:44:35', position: 'Student', roles: 'standard')
+user3 = User.create!(email: 'teacherwork@email.com', password: 'study6', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'Faculty', roles:'standard')
+user4 = User.create!(email: 'superadmin@email.com', password: 'admin6', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'Faculty', roles: 'admin')
+user5 = User.create!(email: 'editmon@email.com', password: 'editor', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'Student', roles: 'editor')
 stud1 = Student.create(student_id: '1234567', last_name: 'jacobs', first_name: 'boxer', home_address: '257 Discovery road' ,home_city: 'Rockford' ,home_state: 'Illinois',
     home_zip: '60106',school_year_address: '257 Discovery road',school_year_city: 'Rockford', school_year_zip: '60106', room_number: 'NULL', home_phone: '3518759989',
     cell_phone: '9856243571', new_student: '0', returning_student: '1', athletic_team: 'NULL', user_id: user2.id, created_at: '2016-05-25 10:00:35', updated_at: '2016-06-20 11:44:35')
