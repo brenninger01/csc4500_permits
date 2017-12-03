@@ -3,6 +3,7 @@ class VehiclePermit < ApplicationRecord
 	belongs_to	:user, optional: true
 	has_one	:vehicle
 	accepts_nested_attributes_for :vehicle
+	attr_accessor :license_number
 
 	def self.search(search)
 		where("vehicle_permit_id LIKE ? OR issued_by LIKE ? OR entered_by LIKE ?", 
