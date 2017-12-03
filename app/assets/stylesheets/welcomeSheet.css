@@ -1,0 +1,30 @@
+#right {
+  width: 20%;
+  height: 40%;
+  position: absolute;
+  right: 10px;
+  top: 24%;
+}
+#left{
+  width: 20%;
+  height: 60%;
+  position: absolute;
+  left: 0px;
+  top: 24%;
+}
+#middle{
+display: block;
+margin: 0 auto;
+
+}
+
+#bottomRight{
+  float: right;
+  margin: 10px;
+  width: 33%;
+  height: 10%;
+}
+
+.white{
+  color: white;
+}
