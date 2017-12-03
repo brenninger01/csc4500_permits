@@ -11,6 +11,10 @@ ActiveAdmin.register EmergencyContact do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  filter :last_name
+  filter :first_name
+  filter :home_phone
+  filter :cell_phone
 
 	show do
   	attributes_table do

@@ -12,6 +12,10 @@ ActiveAdmin.register Vehicle do
 #   permitted
 # end
 
+  filter :make
+  filter :model
+  filter :license_number
+  filter :color
 	permit_params :user, :year, :color, :make, :make, :model, :license_number, :state_licensed, :experation_year, :vehicle_permit_id, :student_id, :faculty_id
 
 	form do |f|

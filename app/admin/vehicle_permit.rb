@@ -11,7 +11,9 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-	filter :permit_id
+	filter :vehicle_permit_id
+	filter :entered_by
+	filter :issued_by
 	permit_params :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by,
 		vehicle_attributes: [:license_number]
 	
