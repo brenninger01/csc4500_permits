@@ -1,14 +1,15 @@
 
 <h1>Faculties</h1>
 
-<%= form_tag(faculties_path, :method => "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Faculty" %>
-<%= submit_tag "Search" %>
+<% if current_user.admin? || current_user.editor? %>
+  <%= form_tag(faculties_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Faculty" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+  <% if @faculties.empty? %>
+    <p>There are no permits containing the term(s) <%= params[:search] %>.</p>
+  <% end %>
 <% end %>
-<% if @faculties.empty? %>
-  <p>There are no permits containing the term(s) <%= params[:search] %>.</p>
-<% end %>
-
 <table>
   <thead>
     <tr>
@@ -43,4 +44,4 @@
 
 <br>
 
-<%= link_to 'New Faculty', new_faculty_path %>
+<%= link_to 'New Faculty', new_faculty_path  if current_user.faculty.nil?%>

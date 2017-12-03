@@ -6,19 +6,16 @@ class FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the faculty in database.
+    if current_user.admin? or current_user.editor? #checks if user is admin, if so displays all of the faculty in database.
       @faculties = Faculty.all
-    elsif user_signed_in?
-      @faculties = Faculty.all.where(:user_id => current_user.id) #Only displays the the users faculty.
-    else
-      @faculties = Faculty.all
-    end
-
-    if params[:search]
+      if params[:search]
         @faculties = Faculty.search(params[:search]).order("created_at DESC")
       else
         @faculties = Faculty.all.order('created_at DESC')
       end
+    elsif user_signed_in?
+      @faculties = Faculty.all.where(:user_id => current_user.id) #Only displays the the users faculty.
+    end
     authorize @faculties
   end
 
