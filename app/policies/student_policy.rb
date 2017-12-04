@@ -26,8 +26,6 @@ class StudentPolicy < ApplicationPolicy
 	end
 
 	def edit?
-		#return true if (user.present? && user.admin?) || (user.present? && user.editor?)
-
 		user.present? && user == record.user
 	end
 
