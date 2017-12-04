@@ -21,10 +21,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-              <% if current_user.faculty? %>
+              <% if current_user.admin? or current_user.editor? %>
                 <li> <a id="whiteColor" href="/faculties">Faculty</a></li>
-              <% end %>
-              <% if current_user.student? %>
+                <li><a id="whiteColor" href="/students">Students</a></li>
+              <% elsif current_user.faculty? %>
+                <li> <a id="whiteColor" href="/faculties">Faculty</a></li>
+              <% elsif current_user.student? %>
                 <li><a href="/students">Students</a></li>
               <% end %>
               
