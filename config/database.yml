@@ -51,8 +51,7 @@ test:
 production:
   <<: *default
   database: csc4500_permits_production
-  username: csc4500_permits
-  password: <%= ENV['CSC4500_PERMITS_DATABASE_PASSWORD'] %>
   adapter: postgresql
   host: localhost
+  password:
   url: <%= ENV['DATABASE_URL'] %>
