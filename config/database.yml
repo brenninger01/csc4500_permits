@@ -52,3 +52,4 @@ production:
   database: csc4500_permits_production
   username: csc4500_permits
   password: <%= ENV['CSC4500_PERMITS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
