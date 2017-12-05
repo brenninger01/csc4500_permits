@@ -1,5 +1,11 @@
-<h1>Students</h1>
-
+<link rel = "stylesheet" type = "text/css" href = "/app/assets/stylesheets/styledforms.css" />
+<style media="screen">
+  body{
+    background-color: #314455;
+  }
+</style>
+<h1 id = "name">Students</h1>
+<div id="tst">
 <% if current_user.admin? || current_user.editor? %>
   <%= form_tag(students_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Students" %>
@@ -41,7 +47,5 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
-
-<%= link_to 'New Student', new_student_path %>

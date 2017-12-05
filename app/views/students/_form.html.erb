@@ -1,3 +1,9 @@
+<style media="screen">
+  .align{
+    text-align: right;
+    padding-right: 8%;
+  }
+</style>
 <%= form_with(model: student, local: true) do |form| %>
   <% if student.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +16,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="align">
   <div class="field">
     <% unless @student.persisted? %>
       <%= form.label :ID %>
@@ -95,5 +101,6 @@
 
   <div class="actions">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

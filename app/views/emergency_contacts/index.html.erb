@@ -1,6 +1,16 @@
+<link rel = "stylesheet" type = "text/css" href = "/app/assets/stylesheets/styledforms.css" />
 
-<h1>Emergency Contacts</h1>
+<style media="screen">
+  body{
+    background-color: #314455;
+  }
+  .pads{
+    margin-left: 100px;
+  }
+</style>
 
+<h1 id = "name">Emergency Contacts</h1>
+<div class = "pads" id="tst">
 <table>
   <thead>
     <tr>
@@ -34,7 +44,5 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
-
-<%= link_to 'New Emergency Contact', new_emergency_contact_path %>
