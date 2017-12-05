@@ -1,6 +1,31 @@
-<h1>Editing Vehicle</h1>
+<style media="screen">
+  #tst{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+  #thicker{
+    text-align: center;
+    font-size: 36px;
+  }
+  #link{
+    border-radius: 8px;
+    background-color:#48AA48;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+</style>
+
+<div id="tst">
+<h1 id = "thicker">Editing Vehicle</h1>
 
 <%= render 'form', vehicle: @vehicle %>
 
 <%= link_to 'Show', @vehicle %> |
 <%= link_to 'Back', vehicles_path %>
+</div>

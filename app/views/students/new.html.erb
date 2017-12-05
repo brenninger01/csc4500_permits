@@ -1,5 +1,28 @@
-<h1>New Student</h1>
+<style media="screen">
+  #tst{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+  #thicker{
+    text-align: center;
+    font-size: 36px;
+  }
+  #link{
+    border-radius: 8px;
+    background-color:#48AA48;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+</style>
 
+<div id="tst">
+<h1 id = "thicker">New Student</h1>
 <%= render 'form', student: @student %>
- 
-<%= link_to 'Back', students_path %>
+<a id = "link" href="/students">Back</a>
+</div>
