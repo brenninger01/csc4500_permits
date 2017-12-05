@@ -1,3 +1,9 @@
+<style media="screen">
+  .align{
+    text-align: right;
+    padding-right: 8%;
+  }
+</style>
 <%= form_with(model: emergency_contact, local: true) do |form| %>
   <% if emergency_contact.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +16,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="align">
   <div class="field">
     <%= form.label :last_name %>
     <%= form.text_field :last_name, id: :emergency_contact_last_name %>
@@ -58,5 +64,6 @@
 
   <div class="actions">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

@@ -1,3 +1,9 @@
+<style media="screen">
+  .align{
+    text-align: right;
+    padding-right: 8%;
+  }
+</style>
 <%= form_with(model: vehicle, local: true) do |form| %>
   <% if vehicle.errors.any? %>
     <div id="error_explanation">
@@ -10,7 +16,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="align">
   <div class="field">
     <%= form.label :year %>
     <%= form.text_field :year, id: :vehicle_year, :required => 'required', placeholder: "Required" %>
@@ -45,10 +51,8 @@
     <%= form.label :experation_year %>
     <%= form.text_field :experation_year, id: :vehicle_experation_year, :required => 'required', placeholder: "Required" %>
   </div>
-
-  
-
   <div class="actions">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>

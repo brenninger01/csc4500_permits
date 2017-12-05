@@ -9,48 +9,63 @@
     margin: 5px;
     background-color: #314455;
   }
+  #link{
+    border-radius: 8px;
+    background-color:#48AA48;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+
+}
 </style>
 <body>
   <div class="white">
-  <h1>Welcome to Campus Safety Permits</h1>
-  <% if current_user.student? && current_user.student.present? %>
-      <h2><%= link_to current_user.student.first_name + " " + current_user.student.last_name, student_path(current_user.student.student_id) %></h2>
-    <% elsif current_user.faculty? && current_user.faculty.present? %>
-      <h2><%= link_to current_user.faculty.first_name + " " + current_user.faculty.last_name, faculty_path(
-      current_user.faculty.faculty_id) %></h2>
-    <% else %>
-      <h2>
-        <%= link_to "Please click here to enter Personal Info", "students/new" if current_user.student?%>
-        <%= link_to "Please click here to enter Personal Info", "faculties/new" if current_user.faculty?%>
-      </h2> 
-    <% end %>
+  <h1>Welcome to Campus Saftey Permits</h1>
+  <h2>
+    <%begin %>
+    <%= current_user.student.first_name + " " + current_user.student.last_name%>
+      <%rescue StandardError => e %>
+      <%begin %>
+      <%= current_user.faculty.first_name + " " + current_user.faculty.last_name%>
+        <%rescue StandardError => e %>
+        Please Continue to Register:
+        <% if current_user.student? %>
+          <a id = "link" href="/students/new">Student Register Form</a>
+        <% else %>
+          <a id = "link" href="/faculties/new">Faculty Register Form</a>
+        <% end %>
+      <%end %>
+    <%end %>
+  </h2>
   </div>
   <div id = "right" class="container">
     <div class="well">
-      <ul class="nav" >
-          <li class="nav-header" style = "font-size: 24px;"> Vehicle </li>
-          <hr>
-          <li style = "font-size: 18px;">  Registered Vehcile: </li>
-          <li>
-            <% if current_user.vehicles.present? %>
-            <%= link_to current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model, vehicle_path(current_user.vehicles.first.vehicle_id) %>
-            <% if current_user.vehicles.first.model != current_user.vehicles.last.model %>
-              <%= link_to current_user.vehicles.last.year + " " + current_user.vehicles.last.make + " " + current_user.vehicles.last.model, vehicle_path(current_user.vehicles.last.vehicle_id) %>
-            <% end %>
-          <% else %>
-            <%= link_to "Please click here to enter vehicle info", new_vehicle_path %>
-          <% end %>
-          </li>
-          <hr>
-          <li class="nav-header" style = "font-size: 24px;">Emergency Contact</li>
-          <hr>
-          <li>Primary Contact:<br> 
-          <%= link_to current_user.emergency_contact.first_name + " " + current_user.emergency_contact.last_name, emergency_contact_path(current_user.emergency_contact.contact_id) if current_user.emergency_contact.present? %>
-
-          <%= link_to "Please click here to enter Emergency Contact", new_emergency_contact_path if current_user.emergency_contact.nil? %>
-        </li>
-      </ul>
-    </div>
+                      <ul class="nav" >
+                          <li class="nav-header" style = "font-size: 24px;"> Vehicle </li>
+                          <hr>
+                          <li style = "font-size: 18px;">  Registered Vehcile: </li>
+                          <li>
+                            <%begin %>
+                              <%=current_user.vehicles.first.year + " " + current_user.vehicles.first.make + " " + current_user.vehicles.first.model%>
+                              <%rescue StandardError => e %>
+                                Your vehicle is not registered.<br/>
+                                <a id = "link" href="/vehicles/new">Vehicle Registration Form</a>
+                            <%end %> </li>
+                          <hr>
+                          <li class="nav-header" style = "font-size: 22px;">Emergency Contact</li>
+                          <hr>
+                          <li>
+                            <%begin %>
+                              <%=current_user.emergency_contact.first_name + " " + current_user.emergency_contact.last_name + " " + current_user.emergency_contact.cell_phone%>
+                              <%rescue StandardError => e %>
+                                Your emergency contact is not registered.<br/>
+                                <a id = "link" href="/emergency_contacts/new">Emergency Contact Form</a>
+                            <%end %> </li>
+                      </ul>
+                          </div>
   </div>
 
 <div id = "left" class="container">
