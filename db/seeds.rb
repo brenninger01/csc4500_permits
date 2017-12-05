@@ -12,6 +12,7 @@ user1 = User.create!(email: 'studenthome@email.com', password: 'learner', create
 user2 = User.create!(email: 'teacherwork@email.com', password: 'study6', created_at: '2012-08-25 12:05:35', updated_at: '2017-08-25 11:44:35', position: 'faculty', roles:'standard')
 user3 = User.create!(email: 'studenttwo@email.com', password: 'learner', created_at: '2016-05-25 10:00:35', updated_at: '2016-06-20 11:44:35', position: 'student', roles: 'editor')
 user4 = User.create!(email: 'teacher02@email.com', password: 'study2', created_at: '2017-01-01 10:00:00', updated_at: '2017-06-20 10:04:00', position: 'faculty', roles: 'admin')
+user5 = User.create!(email: 'teach3@email.com', password: 'teacher', created_at: '2017-01-01 10:00:00', updated_at: '2017-06-20 10:04:00', position: 'faculty', roles: 'standard')
 
 stud1 = Student.create(student_id: '1234567', last_name: 'jacobs', first_name: 'boxer', home_address: '257 Discovery road' ,home_city: 'Rockford' ,home_state: 'Illinois',
     home_zip: '60106',school_year_address: '257 Discovery road',school_year_city: 'Rockford', school_year_zip: '60106', room_number: 'NULL', home_phone: '3518759989',
@@ -21,11 +22,14 @@ stud2 = Student.create(student_id: '9876543', last_name: 'Ryan', first_name: 'Da
     cell_phone: '3526498752', new_student: '0', returning_student: '1', athletic_team: 'NULL', user_id: user3.id, created_at: '2016-05-25 10:00:35', updated_at: '2016-06-20 11:44:35')
 
 fac1 = Faculty.create(faculty_id: '0983547', last_name: 'Kane', first_name: 'Jeffery', home_address: '156 Lake St' , city: 'Aurora' , state: 'Illinois',
-     zip: '60505', home_phone: '3313568794', cell_phone: '6305896245', office_phone: '6302569874', new_faculty: '0', department: 'Math', office: 'Dun 215',
+     zip: '60505', home_phone: '3313568794', cell_phone: '6305896245', office_phone: '6302569874', new_faculty: '0', department: 'Chemistry', office: 'Dun 215',
      user_id: user2.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
 fac2 = Faculty.create(faculty_id: '3568971', last_name: 'Grosby', first_name: 'Maxwell', home_address: '351 Waterfall rd' , city: 'Batavia' , state: 'Illinois',
      zip: '60352', home_phone: '3316598241', cell_phone: '6302569874', office_phone: '6302354681', new_faculty: '1', department: 'Math', office: 'Dun 217',
      user_id: user4.id, created_at: '2017-01-01 10:00:02', updated_at: '2017-06-20 10:04:00')
+fac3 = Faculty.create(faculty_id: '9102912', last_name: 'Sunders', first_name: 'James', home_address: '351 Waterfall rd' , city: 'Batavia' , state: 'Illinois',
+     zip: '60352', home_phone: '3316598241', cell_phone: '3124658755', office_phone: '7984578433', new_faculty: '0', department: 'History', office: 'Inst 250',
+     user_id: user5.id, created_at: '2017-01-01 10:00:02', updated_at: '2017-06-20 10:04:00')
 
 ec1 = EmergencyContact.create(last_name: 'emery', first_name: 'liz', address: '357 Some ave', city: 'SomeTown' , state: 'Illinois', zip: '60542', home_phone: '6897541235',
     cell_phone: '6872654132', office_phone: '235146215', faculty_id: fac1.faculty_id, user_id: user2.id, created_at: '2015-04-3 12:54:35', updated_at: '2015-12-3 10:54:35' )
@@ -35,6 +39,8 @@ ec3 = EmergencyContact.create(last_name: 'Smith', first_name: 'Alan', address: '
     cell_phone: '4597534812', office_phone: '4658795422ext44', faculty_id: fac2.faculty_id, user_id: user4.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
 ec4 = EmergencyContact.create(last_name: 'Wake', first_name: 'Betty', address: '8909 Something Ln', city: 'Bordon', state: 'New Jersey', zip: '31245', home_phone: '8754126599',
     cell_phone: '1234859475', office_phone: 'NULL', student_id: stud1.id, user_id: user1.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
+ec5 = EmergencyContact.create(last_name: 'Smith', first_name: 'Alan', address: '124 Place St', city: 'Anywheresville', state: 'Pennsylvania', zip: '12344', home_phone: '8794856411',
+    cell_phone: '4597534812', office_phone: '4658795422ext44', faculty_id: fac3.faculty_id, user_id: user5.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
 
 pe1 = VehiclePermit.create(vehicle_permit_id: '38546', date_issued: '2017-08-25 10:00:35', issued_by: 'Steve', date_entered: '2017-08-25',
     entered_by: fac1.first_name + ' ' + fac1.last_name, user_id: user2.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
@@ -44,6 +50,10 @@ pe3 = VehiclePermit.create(vehicle_permit_id: '94832', date_issued: '2017-12-4 1
     entered_by: fac2.first_name + ' ' + fac2.last_name, user_id: user4.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
 pe4 = VehiclePermit.create(vehicle_permit_id: '43532', date_issued: '2017-12-4 11:50:00', issued_by: 'Alex', date_entered: '2017-12-4',
     entered_by: fac1.first_name + ' ' + fac1.last_name, user_id: user1.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
+pe5 = VehiclePermit.create(vehicle_permit_id: '12345', date_issued: '2017-12-4 11:50:00', issued_by: 'Steve', date_entered: '2017-12-4',
+    entered_by: fac3.first_name + ' ' + fac3.last_name, user_id: user5.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
+pe6 = VehiclePermit.create(vehicle_permit_id: '97845', date_issued: '2017-12-4 11:50:00', issued_by: 'Paul', date_entered: '2017-12-4',
+    entered_by: fac3.first_name + ' ' + fac3.last_name, user_id: user5.id, created_at: '2017-12-4 11:50:00', updated_at: '2017-12-4 11:50:00')
 
 vh1 = Vehicle.create(year: '2009', color: 'red', make: 'Ford', model: 'Fiesta', license_number: 'K59879515', state_licensed: 'IL',
      experation_year: '2020', vehicle_permit_id: pe1.vehicle_permit_id, faculty_id: fac1.faculty_id, user_id: user2.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
@@ -53,6 +63,10 @@ vh3 = Vehicle.create(year: '2017', color: 'green', make: 'Buick', model: 'Bearcl
      experation_year: '2025', vehicle_permit_id: pe3.vehicle_permit_id, faculty_id: fac2.faculty_id, user_id: user4.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
 vh4 = Vehicle.create(year: '2014', color: 'silver', make: 'Toyota', model: 'Camry', license_number: 'B35488234', state_licensed: 'IL',
      experation_year: '2025', vehicle_permit_id: pe4.vehicle_permit_id, student_id: stud1.student_id, user_id: user1.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
+vh5 = Vehicle.create(year: '2007', color: 'silver', make: 'Toyota', model: 'Corrola', license_number: 'B35789234', state_licensed: 'IL',
+     experation_year: '2025', vehicle_permit_id: pe5.vehicle_permit_id, faculty_id: fac3.faculty_id, user_id: user5.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
+vh6 = Vehicle.create(year: '2013', color: 'white', make: 'KIA', model: 'Sorento', license_number: 'G45789234', state_licensed: 'IL',
+     experation_year: '2025', vehicle_permit_id: pe5.vehicle_permit_id, faculty_id: fac3.faculty_id, user_id: user5.id, created_at: '2012-08-25 10:00:35', updated_at: '2017-08-20 11:44:35')
 
 puts "Added #{User.count} users"
 puts "Added #{Student.count} students"
