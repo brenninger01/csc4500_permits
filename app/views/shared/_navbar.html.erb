@@ -17,40 +17,41 @@
           </button>
           <a id="whiteColor"class="navbar-brand" href="/">Home</a>
         </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li> <a id="whiteColor" href="/faculties">Faculty</a></li>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li>
-          <% if user_signed_in? %>
-            <% if current_user.editor? || current_user.admin? %>
-              <li><a href="/faculties">Faculty <span class="sr-only">(current)</span></a></li>
-              <li><a href="/students">Students</a></li>
-            <% elsif current_user.student? %>
-              <a href="/students">Students</a>
-            <% elsif  current_user.faculty?  %>
-              <a href="/faculties">Faculty <span class="sr-only">(current)</span></a>
-            <% end %>
-          <li><a href="/vehicles">Vehicles</a></li>
-          <li><a href="/vehicle_permits">Permits</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="/emergency_contacts">Emergency Contacts</a></li>
-          <li role="seperator" class="divider"></li>
-          <li><a href="/about">About Us</a></li>
-        <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-		    <% if user_signed_in? #Checks if user is signed in, if so displays user email and log out button. If logged out then displays log in and sign up button.  %>
-        <% if current_user.admin? %>
-        <li><a href="/admin">Admin</a></li>
-        <% end %>
-		    <li><%= link_to current_user.email, edit_user_registration_path %></li>
-		    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-		    <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-		    <li><%= link_to "Log in", new_user_session_path %></li>
-		    <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+            <li><a id="whiteColor" href="/vehicles">Vehicles</a></li>
+
+            <li class="dropdown">
+              <a href="#" id="whiteColor" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More Resources <span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+                <li><a href="/permits">Permits</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/emergency_contacts">Emergency Contacts</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/students">Students</a></li>
+                <li role="seperator" class="divider"></li>
+                <li><a href="/about">About Us</a></li>
+              </ul>
+
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+    		<% if user_signed_in? #Checks if user is signed in, if so displays user email and log out button. If logged out then displays log in and sign up button.  %>
+          <% if current_user.roles == 'admin' %>
+            <li><a href="/admin">Admin</a></li>
+          <% end %>
+    		  <li><%= link_to current_user.email, edit_user_registration_path %></li>
+    		  <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+    		<% else %>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+    		<li><%= link_to "Log in", new_user_session_path %></li>
+    		<% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
