@@ -6,19 +6,17 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    if current_user.roles == 'admin' or current_user.roles == 'editor' #checks if user is admin, if so displays all of the students in database.
+    if current_user.admin? or current_user.editor? #checks if user is admin, if so displays all of the students in database.
       @students = Student.all
-    elsif user_signed_in?
-      @students = Student.all.where(:user_id => current_user.id) #Only displays the the users student. 
-    else
-      @students = Student.all
-    end
-
-    if params[:search]
+      if params[:search]
         @students = Student.search(params[:search]).order("created_at DESC")
       else
         @students = Student.all.order('created_at DESC')
       end
+    elsif user_signed_in?
+      @students = Student.all.where(:user_id => current_user.id) #Only displays the the users student. 
+    end
+
 
     authorize @students
   end

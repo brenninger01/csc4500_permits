@@ -2,6 +2,7 @@ ActiveAdmin.register User do
 	permit_params :roles, :password, :password_confirmation, :position
 	filter :email
   filter :roles
+  filter :position
 
 	index do
     selectable_column

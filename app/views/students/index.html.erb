@@ -40,7 +40,7 @@
         <td><%= student.home_city %></td>
         <td><%= student.cell_phone %></td>
         <td><%= student.athletic_team %></td>
-        <td><%= link_to 'Show', student if policy(student).show? || policy(student).edit? %></td>
+        <td><%= link_to 'Show', student if policy(student).show? || policy(student).edit? || policy(student).admin_show? %></td>
         <td><%= link_to 'Edit', edit_student_path(student) if policy(student).edit? %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } if policy(student).destroy? %></td>
       </tr>
@@ -49,3 +49,4 @@
 </table>
 </div>
 <br>
+<%= link_to 'New Student', new_student_path if current_user.student.nil? %>

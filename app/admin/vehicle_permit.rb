@@ -11,9 +11,12 @@
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-	filter :permit_id
+	filter :vehicle_permit_id
+	filter :entered_by
+	filter :issued_by
 	permit_params :vehicle_permit_id, :vehicle, :date_issued, :issued_by, :date_entered, :entered_by,
 		vehicle_attributes: [:license_number]
+	
 
 
 	index do #defines what the index page displays
@@ -43,9 +46,7 @@
 	form do |f|
 		license_collection = Vehicle.all.map{ |vehicle| [vehicle.license_number] }
   		f.inputs do
-  			f.has_many :vehicle, new_record: false do |veh|
-  				veh.input :license_number, :collection => license_collection
-  			end
+  			f.input :license_number, collection: license_collection
   			f.input :vehicle_permit_id
   			f.input :date_issued, as: :date_picker
   			f.input :issued_by
@@ -61,25 +62,19 @@
     	end 
 
     	def create
-    		#puts params.inspect
-
-    		vehicle = Vehicle.find_by(license_number: permitted_params[:vehicle_permit])
-    		puts vehicle.inspect
-    		 #@vehicle_permit = current_user.vehicle_permit.build(vehicle_permit_params.merge(date_entered: Date.today, entered_by: current_admin_user.email)[:vehicle_permit])
-    		 #@vehicle_permit.update(vehicle: vehicle)
-    		 additional_params = {entered_by: current_admin_user.email, date_entered: Date.today}
-    		 @vehicle_permit = current_user.vehicle_permit.build(permitted_params[:vehicle_permit].merge(additional_params))
-    		 @vehicle_permit.update(vehicle: vehicle)
-    		 super
+    		license_number = params[:vehicle_permit].delete(:license_number)
+    		build_resource # this should set resource = VehiclePermit.build(params[:vehicle_permit])
+		 	resource.vehicle = Vehicle.find_by(license_number: license_number)
+		 	resource.date_entered = Date.today
+		 	resource.entered_by = current_admin_user.email
+    		super
     	end
 
     	def update
 			super    		
     	end
 
-    	def vehicle_permit_params
-    		params.permit vehicle_permit: [:vehicle_permit_id, :date_issued, :issued_by, :date_entered, :entered_by,  vehicle_attributes: [:license_number]]
-    	end
+    	
     end
 
 end

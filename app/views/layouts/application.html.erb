@@ -9,9 +9,13 @@
   </head>
   <body>
   <%= render partial: "shared/navbar" %>
-    <% if notice %><div class="alert alert-info"><%= notice %></div><% end %>
-	  <% if alert %><div class="alert alert-warning"><%= alert %></div><% end %>
+    <% if notice %><div id="flash", class="alert alert-info"><%= notice %></div><% end %>
+	  <% if alert %><div id="flash", class="alert alert-warning"><%= alert %></div><% end %>
   <%= yield %>
+
+<script type="text/javascript">
+$(".alert").delay(5000).fadeOut();
+</script>
 
 
   </body>

@@ -1,9 +1,10 @@
 ActiveAdmin.register Student do
+	
 	permit_params :student_id
 	config.sort_order = 'student_id'
 
 	filter :email
-	filter :student_id
+	filter :student_id, label: "AU ID"
 	filter :last_name
 	filter :first_name
 	filter :athletic_team
@@ -16,7 +17,7 @@ ActiveAdmin.register Student do
 
 	index do #defines what the index page displays
 		selectable_column
-		id_column
+		column :student_id
 		column :last_name
 		column :first_name
 		column :home_address
